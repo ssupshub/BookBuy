@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Delivery Slip</title>
+  <link rel="stylesheet" href="styles/delivery-slip.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="min-h-screen bg-bookBeige bg-paper-texture">
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="back-link">
+          <button class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Orders
+          </button>
+          <div class="order-number">
+            Order #BK42786
+          </div>
+        </div>
+        <h1>Submit Delivery Slip</h1>
+        <p class="subtitle">
+          Upload the delivery slip after shipping the book to the buyer
+        </p>
+      </div>
+      
+      <!-- Main content -->
+      <div class="main-content">
+        
+        <!-- Book details section -->
+        <div class="card paper-card" id="book-details">
+          <div class="card-header">
+            <h2 class="card-title">Book Details</h2>
+          </div>
+          <div class="card-content">
+            <div class="book-content">
+              <div class="book-image-container">
+                <div class="book-image-wrapper">
+                  <img 
+                    src="https://m.media-amazon.com/images/I/41r6F2LRf8L._SY264_BO1,204,203,200_QL40_FMwebp_.jpg" 
+                    alt="The Psychology of Money" 
+                    class="book-image" 
+                  />
+                </div>
+              </div>
+              <div class="book-info">
+                <h3>The Psychology of Money</h3>
+                <p class="book-author">by Morgan Housel</p>
+                
+                <div class="separator"></div>
+                
+                <table class="book-details-table">
+                  <tbody>
+                    <tr>
+                      <td class="detail-label">ISBN</td>
+                      <td class="detail-value">978-9390166268</td>
+                    </tr>
+                    <tr>
+                      <td class="detail-label">Publisher</td>
+                      <td class="detail-value">Jaico Publishing House</td>
+                    </tr>
+                    <tr>
+                      <td class="detail-label">Condition</td>
+                      <td class="detail-value">Like New</td>
+                    </tr>
+                    <tr>
+                      <td class="detail-label">Quantity</td>
+                      <td class="detail-value">1</td>
+                    </tr>
+                    <tr>
+                      <td class="detail-label">Price</td>
+                      <td class="detail-value price">₹399</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <div class="ready-to-ship">
+                  <i class="fas fa-book"></i>
+                  <span>Ready to ship to buyer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Buyer details section -->
+        <div class="card paper-card" id="buyer-details">
+          <div class="card-header">
+            <h2 class="card-title">Buyer Details</h2>
+          </div>
+          <div class="card-content">
+            <div class="buyer-info">
+              <h3>Rahul Sharma</h3>
+              <p class="address">123 Book Lovers Lane
+Apartment 4B</p>
+              <p class="city-state">
+                New Delhi, Delhi - 110001
+              </p>
+            </div>
+            <div class="separator"></div>
+            <div class="buyer-contact">
+              <span class="contact-label">Mobile:</span>
+              <span class="contact-value">+91 98765 43210</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Delivery slip upload section -->
+        <div class="card paper-card" id="delivery-slip-upload">
+          <div class="card-header">
+            <h2 class="card-title">Upload Delivery Slip</h2>
+          </div>
+          <div class="card-content">
+            <div class="form-group">
+              <label for="delivery-partner">Select Delivery Partner</label>
+              <div class="select-wrapper">
+                <select id="delivery-partner" class="form-select">
+                  <option value="" disabled selected>Select a delivery partner</option>
+                  <option value="india_post" class="recommended">India Post (Recommended)</option>
+                  <option value="dtdc">DTDC</option>
+                  <option value="delhivery">Delhivery</option>
+                  <option value="blue_dart">Blue Dart</option>
+                  <option value="fedex">FedEx</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="delivery-number">Delivery Number</label>
+              <input
+                id="delivery-number"
+                type="text"
+                placeholder="Enter delivery tracking number"
+                class="form-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Upload Delivery Slip Photo</label>
+              <div id="dropzone" class="dropzone">
+                <div id="dropzone-placeholder" class="dropzone-placeholder">
+                  <i class="fas fa-file-image"></i>
+                  <p>
+                    Drag & drop your delivery slip photo here, or click to browse
+                  </p>
+                  <label for="slip-upload" class="upload-button">
+                    <i class="fas fa-upload"></i>
+                    Select File
+                  </label>
+                  <input
+                    id="slip-upload"
+                    type="file"
+                    accept="image/*"
+                    class="hidden"
+                  />
+                </div>
+                <div id="preview-container" class="preview-container hidden">
+                  <img
+                    id="preview-image"
+                    src=""
+                    alt="Delivery Slip"
+                    class="preview-image"
+                  />
+                  <button
+                    id="remove-image"
+                    class="remove-button"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="hint-text">
+                Upload a clear photo of the delivery slip. Maximum file size: 5MB.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- India Post promotion -->
+        <div class="card paper-card promotion-card" id="india-post-promotion">
+          <div class="card-header promotion-header">
+            <h2 class="card-title">
+              India Post Recommendation
+              <span class="badge">Special Discount</span>
+            </h2>
+          </div>
+          <div class="card-content">
+            <p>
+              We recommend using <span class="bold">India Post</span> for shipping books as they offer special discounted rates for book delivery across India.
+            </p>
+            
+            <div class="benefits-box">
+              <h4>Benefits of using India Post:</h4>
+              <ul>
+                <li>Special "Book Post" category with discounted rates</li>
+                <li>Extensive reach across all Indian pin codes</li>
+                <li>Reliable tracking for registered parcels</li>
+                <li>Multiple service options (Regular, Registered, Speed Post)</li>
+              </ul>
+            </div>
+            
+            <p class="small-text">
+              Simply mention "Book Post" when shipping at your local post office to avail the discount.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Video tutorial -->
+        <div class="card paper-card" id="video-tutorial">
+          <div class="card-header">
+            <h2 class="card-title">How to Ship Books</h2>
+          </div>
+          <div class="card-content">
+            <p>
+              Watch our step-by-step tutorial on how to properly pack and ship books to ensure they reach the buyer in perfect condition.
+            </p>
+            
+            <div class="video-container">
+              <div class="video-placeholder">
+                <p>YouTube video will be embedded here</p>
+              </div>
+            </div>
+            
+            <div class="tips-box">
+              <h4>Quick Tips:</h4>
+              <ul>
+                <li>Use bubble wrap or newspaper to protect book corners</li>
+                <li>Wrap books in plastic to prevent water damage</li>
+                <li>Use a rigid box or envelope to prevent bending</li>
+                <li>Keep the delivery slip safe after shipping</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Submit button -->
+        <div class="submit-container">
+          <button id="submit-button" class="submit-button">
+            <i class="fas fa-paper-plane"></i>
+            Submit Delivery Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden">
+    <div class="toast-content">
+      <div class="toast-title">Delivery slip submitted successfully!</div>
+      <div class="toast-description">The buyer will be notified about the shipment.</div>
+    </div>
+    <button class="toast-close">&times;</button>
+  </div>
+
+  <script src="script/delivery-slip.js"></script>
+</body>
+</html>

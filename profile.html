@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reader's Profile | Bookworm Marketplace</title>
+  <link rel="stylesheet" href="styles/profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <i class="fas fa-book-open"></i>
+          <span>BookSell</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <ul class="navbar-menu">
+          <li class="navbar-item">
+            <a href="/books" class="navbar-link">Books</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/buy-books" class="navbar-link">Buy Books</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link">About</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/contact" class="navbar-link">Contact</a>
+          </li>
+          <li class="navbar-item dropdown">
+            <button class="navbar-link dropdown-toggle">
+              <i class="fas fa-user"></i>
+              Account
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="/login">Login / Signup</a></li>
+              <li><a href="/">Profile</a></li>
+              <li><a href="/browse-books">Browse Books</a></li>
+              <li><a href="/uploaded-books">Uploaded Books</a></li>
+              <li><a href="/selling-orders">My Selling Orders</a></li>
+              <li><a href="/orders">My Orders</a></li>
+              <li><a href="/wishlist">My Wishlist</a></li>
+              <li><a href="/help">Help and Support</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Mobile menu toggle button -->
+        <button class="navbar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Mobile Menu (Initially Hidden) -->
+        <div class="mobile-menu">
+          <div class="mobile-menu-header">
+            <a href="/" class="navbar-logo">
+              <i class="fas fa-book-open"></i>
+              <span>BookSell</span>
+            </a>
+            <button class="mobile-menu-close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <ul class="mobile-menu-items">
+            <li><a href="/books">Books</a></li>
+            <li><a href="/buy-books">Buy Books</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="mobile-submenu-header">Account</li>
+            <li class="mobile-submenu-item"><a href="/login">Login / Signup</a></li>
+            <li class="mobile-submenu-item"><a href="/">Profile</a></li>
+            <li class="mobile-submenu-item"><a href="/browse-books">Browse Books</a></li>
+            <li class="mobile-submenu-item"><a href="/uploaded-books">Uploaded Books</a></li>
+            <li class="mobile-submenu-item"><a href="/selling-orders">My Selling Orders</a></li>
+            <li class="mobile-submenu-item"><a href="/orders">My Orders</a></li>
+            <li class="mobile-submenu-item"><a href="/wishlist">My Wishlist</a></li>
+            <li class="mobile-submenu-item"><a href="/help">Help and Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="header-section">
+        <div class="icon-wrapper">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h1>Reader's Profile</h1>
+        <p>Manage your account details and preferences</p>
+      </div>
+
+      <!-- Profile Card View (Default View) -->
+      <div id="profileCardView" class="card profile-card">
+        <div class="card-header">
+          <h2>Reader Profile</h2>
+          <button id="editProfileBtn" class="btn btn-primary">
+            <i class="fas fa-edit"></i> Update Profile
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="profile-item">
+            <div class="profile-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+              <p class="info-label">Full Name</p>
+              <p id="profileName" class="info-value">Rahul Sharma</p>
+            </div>
+          </div>
+          
+          <div class="profile-item">
+            <div class="profile-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="profile-info">
+              <p class="info-label">Email Address</p>
+              <p id="profileEmail" class="info-value">rahul.sharma@example.com</p>
+            </div>
+          </div>
+          
+          <div class="profile-item">
+            <div class="profile-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="profile-info">
+              <p class="info-label">Phone Number</p>
+              <p id="profilePhone" class="info-value">9876543210</p>
+            </div>
+          </div>
+          
+          <div class="profile-item">
+            <div class="profile-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="profile-info">
+              <p class="info-label">Address</p>
+              <p id="profileAddress" class="info-value">123 Book Lane, Literary District, Bibliophile City, 400001</p>
+            </div>
+          </div>
+          
+          <div class="profile-item" id="aadharVerification">
+            <div class="profile-icon verification-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="profile-info">
+              <p class="info-label">Aadhar Verification</p>
+              <p id="verificationStatus" class="info-value">Not Verified</p>
+            </div>
+            <button id="verifyBtn" class="btn btn-verify">
+              <i class="fas fa-shield-alt"></i> Verify Now
+            </button>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button id="changePasswordBtn" class="btn btn-secondary">
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <!-- Edit Profile Form (Initially Hidden) -->
+      <div id="editProfileView" class="card profile-form hidden">
+        <div class="card-header">
+          <h2>Update Profile</h2>
+        </div>
+        <div class="card-content">
+          <form id="profileForm">
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="address">Delivery Address</label>
+              <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button id="cancelEditBtn" class="btn btn-tertiary">
+            <i class="fas fa-arrow-left"></i> Cancel
+          </button>
+          <button id="saveProfileBtn" class="btn btn-primary">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </div>
+      </div>
+
+      <!-- Change Password Form (Initially Hidden) -->
+      <div id="passwordView" class="card password-form hidden">
+        <div class="card-header">
+          <h2>Change Password</h2>
+        </div>
+        <div class="card-content">
+          <form id="passwordForm">
+            <div class="form-group">
+              <label for="currentPassword">Current Password</label>
+              <div class="password-input-container">
+                <input type="password" id="currentPassword" name="currentPassword" required>
+                <button type="button" class="toggle-password" data-for="currentPassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="newPassword">New Password</label>
+              <div class="password-input-container">
+                <input type="password" id="newPassword" name="newPassword" required>
+                <button type="button" class="toggle-password" data-for="newPassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <p class="password-hint">Password must be at least 8 characters</p>
+            </div>
+            
+            <div class="form-group">
+              <label for="confirmPassword">Confirm New Password</label>
+              <div class="password-input-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button type="button" class="toggle-password" data-for="confirmPassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button id="cancelPasswordBtn" class="btn btn-tertiary">
+            <i class="fas fa-arrow-left"></i> Cancel
+          </button>
+          <button id="updatePasswordBtn" class="btn btn-primary">
+            <i class="fas fa-lock"></i> Update Password
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+  
+  <script src="script/profile.js"></script>
+</body>
+</html>

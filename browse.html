@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Books - BookBuy</title>
+  <link rel="stylesheet" href="styles/browse.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <div class="navbar-logo">
+          <a href="/" class="logo-link">
+            <i class="fa-solid fa-book"></i>
+            <span class="logo-text">BookBuy</span>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation with centered search -->
+        <div class="navbar-search">
+          <form id="navSearchForm" class="search-form">
+            <div class="search-input-container">
+              <input
+                type="text"
+                placeholder="Search for books..."
+                id="navSearchInput"
+                class="search-input"
+              />
+              <i class="fa-solid fa-search search-icon"></i>
+            </div>
+            <button type="submit" class="search-button">Search Book</button>
+          </form>
+        </div>
+
+        <!-- Right icons -->
+        <div class="navbar-icons">
+          <a href="wishlist.html" class="nav-icon">
+            <i class="fa-solid fa-heart"></i>
+          </a>
+          <a href="cart.html" class="nav-icon">
+            <i class="fa-solid fa-shopping-cart"></i>
+          </a>
+          
+          <!-- User dropdown -->
+          <div class="dropdown">
+            <button class="dropdown-trigger">
+              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="login.html" class="dropdown-item">Login/Signup</a>
+              <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+              <a href="sellingorders.html" class="dropdown-item">My Selling Orders</a>
+              <a href="contact.html" class="dropdown-item">Help and Support</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="mobile-menu-button">
+          <button id="mobileMenuToggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobileMenu" class="mobile-menu">
+        <form class="mobile-search-form">
+          <div class="mobile-search-input-container">
+            <input
+              type="text"
+              placeholder="Search for books..."
+              class="mobile-search-input"
+            />
+            <i class="fa-solid fa-search mobile-search-icon"></i>
+          </div>
+          <button type="submit" class="mobile-search-button">Search</button>
+        </form>
+        <a href="wishlist.html" class="mobile-menu-item">Wishlist</a>
+        <a href="cart.html" class="mobile-menu-item">Cart</a>
+        <a href="login.html" class="mobile-menu-item">Login/Signup</a>
+        <a href="sellingorders.html" class="mobile-menu-item">My Selling Orders</a>
+        <a href="contact.html" class="mobile-menu-item">How it Works</a>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="main-container">
+    <div class="container page-container">
+      <div class="page-header">
+        <h1 class="page-title">Browse Books</h1>
+      </div>
+      
+      <!-- Categories Bar -->
+      <div class="categories-bar">
+        <div class="categories-list">
+          <div class="category-item">
+            <button class="category-button">College Books</button>
+            <div class="subcategories-dropdown">
+              <div class="subcategory-item">Engineering</div>
+              <div class="subcategory-item">Medical</div>
+            </div>
+          </div>
+          <div class="category-item">
+            <button class="category-button">Novels</button>
+            <div class="subcategories-dropdown">
+              <div class="subcategory-item">Fiction</div>
+              <div class="subcategory-item">Non-Fiction</div>
+            </div>
+          </div>
+          <div class="category-item">
+            <button class="category-button">Exam Preparation</button>
+            <div class="subcategories-dropdown">
+              <div class="subcategory-item">Competitive Exams</div>
+              <div class="subcategory-item">School Exams</div>
+            </div>
+          </div>
+          <div class="category-item">
+            <button class="category-button">School Books</button>
+            <div class="subcategories-dropdown">
+              <div class="subcategory-item">Primary</div>
+              <div class="subcategory-item">Secondary</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="content-wrapper">
+        <!-- Left Sidebar - Filters -->
+        <div class="filters-sidebar">
+          <div class="filters-container">
+            <h2 class="filters-header">Filters</h2>
+            
+            <!-- Search Bar -->
+            <div class="filter-search">
+              <form id="filterSearchForm" class="filter-search-form">
+                <div class="filter-search-input-container">
+                  <input
+                    type="text"
+                    placeholder="Search books by title, author..."
+                    id="filterSearchInput"
+                    class="filter-search-input"
+                  />
+                  <i class="fa-solid fa-search filter-search-icon"></i>
+                </div>
+                <button type="submit" class="filter-search-button">Search Book</button>
+              </form>
+            </div>
+            
+            <!-- Price Range Slider -->
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header" data-accordion="price-range">
+                  <span>Price Range</span>
+                  <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="price-range-content">
+                  <div class="price-range-slider-container">
+                    <div class="price-range-slider" id="priceRangeSlider"></div>
+                    <div class="price-range-values">
+                      <span id="priceRangeMin">₹0</span>
+                      <span id="priceRangeMax">₹1500</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Discount Filter -->
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header" data-accordion="discount">
+                  <span>Discount</span>
+                  <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="discount-content">
+                  <div class="discount-options">
+                    <div class="discount-option">
+                      <input type="radio" id="discount-10" name="discount" value="10">
+                      <label for="discount-10">10% off or more</label>
+                    </div>
+                    <div class="discount-option">
+                      <input type="radio" id="discount-20" name="discount" value="20">
+                      <label for="discount-20">20% off or more</label>
+                    </div>
+                    <div class="discount-option">
+                      <input type="radio" id="discount-30" name="discount" value="30">
+                      <label for="discount-30">30% off or more</label>
+                    </div>
+                    <div class="discount-option">
+                      <input type="radio" id="discount-50" name="discount" value="50">
+                      <label for="discount-50">50% off or more</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Condition Filter -->
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header" data-accordion="condition">
+                  <span>Condition</span>
+                  <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="condition-content">
+                  <div class="condition-options">
+                    <div class="condition-option">
+                      <input type="radio" id="condition-new" name="condition" value="New">
+                      <label for="condition-new">New</label>
+                    </div>
+                    <div class="condition-option">
+                      <input type="radio" id="condition-like-new" name="condition" value="Like New">
+                      <label for="condition-like-new">Like New</label>
+                    </div>
+                    <div class="condition-option">
+                      <input type="radio" id="condition-good" name="condition" value="Good">
+                      <label for="condition-good">Good</label>
+                    </div>
+                    <div class="condition-option">
+                      <input type="radio" id="condition-fair" name="condition" value="Fair">
+                      <label for="condition-fair">Fair</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Sort By Filter -->
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header" data-accordion="sort">
+                  <span>Sort By</span>
+                  <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="sort-content">
+                  <div class="sort-options">
+                    <div class="sort-option">
+                      <input type="radio" id="sort-price-low-high" name="sort" value="price_low_high">
+                      <label for="sort-price-low-high">Price: Low to High</label>
+                    </div>
+                    <div class="sort-option">
+                      <input type="radio" id="sort-price-high-low" name="sort" value="price_high_low">
+                      <label for="sort-price-high-low">Price: High to Low</label>
+                    </div>
+                    <div class="sort-option">
+                      <input type="radio" id="sort-date-newest" name="sort" value="date_newest">
+                      <label for="sort-date-newest">Date: Newest First</label>
+                    </div>
+                    <div class="sort-option">
+                      <input type="radio" id="sort-date-oldest" name="sort" value="date_oldest">
+                      <label for="sort-date-oldest">Date: Oldest First</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Clear Filters Button -->
+            <div class="clear-filters">
+              <button id="clearFilters" class="clear-filters-button">Clear All Filters</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="main-content">
+          <!-- Results info -->
+          <div class="results-info">
+            <p id="resultsCount">Showing 8 books</p>
+          </div>
+          
+          <!-- Books grid -->
+          <div class="books-grid" id="booksGrid">
+            <!-- Books will be inserted here by JavaScript -->
+          </div>
+          
+          <!-- No results message (hidden by default) -->
+          <div class="no-results" id="noResults" style="display: none;">
+            <p class="no-results-message">No books found matching your criteria.</p>
+            <p class="no-results-hint">Try adjusting your search or filters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Card Template -->
+  <template id="bookCardTemplate">
+    <div class="book-card-container">
+      <div class="discount-tag" data-discount></div>
+      <div class="book-card">
+        <div class="book-image-container">
+          <img class="book-cover" src="" alt="">
+          <button class="wishlist-button">
+            <i class="fa-solid fa-heart wishlist-icon"></i>
+          </button>
+          <div class="condition-badge"></div>
+        </div>
+        <div class="book-details">
+          <h3 class="book-title"></h3>
+          <p class="book-author"></p>
+          <div class="book-pricing">
+            <div class="price-container">
+              <span class="book-price"></span>
+              <span class="book-original-price"></span>
+              <span class="discount-badge"></span>
+            </div>
+            <div class="free-shipping-container" style="display: none;">
+              <span class="free-shipping-badge">Free Shipping</span>
+            </div>
+            <div class="book-actions">
+              <button class="add-to-cart-button">
+                <i class="fa-solid fa-shopping-cart cart-icon"></i>
+                Add to Cart
+              </button>
+              <p class="book-category"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Toaster for notifications -->
+  <div id="toaster" class="toaster"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
+  <script src="script/browse.js"></script>
+</body>
+</html>

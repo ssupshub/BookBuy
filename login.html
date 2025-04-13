@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookSell - Your Premium Book Marketplace</title>
+    <meta name="description" content="BookSell - Discover, buy and sell premium books online" />
+    <meta name="author" content="BookSell" />
+
+    <meta property="og:title" content="BookSell - Your Premium Book Marketplace" />
+    <meta property="og:description" content="Discover, buy and sell premium books online" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@booksell" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles/loginstyle.css">
+    
+    <!-- Feather Icons (for Lucide-like icons) -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left side - Hero Image/Banner -->
+      <div class="left-panel">
+        <div class="book-pattern-overlay"></div>
+        <div class="hero-content">
+          <div class="logo logo-lg text-white mb-8">
+            <span class="text-sienna">Book</span>
+            <span class="text-gold">Sell</span>
+          </div>
+          <h1 class="text-white text-4xl font-bold mb-6">Every book deserves a second chapter.</h1>
+          <p class="text-beige text-xl max-w-md mx-auto">
+            Your premier marketplace for buying and selling rare and collectible books.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Right side - Login Form -->
+      <div class="right-panel">
+        <div class="form-container">
+          <!-- Logo for mobile view -->
+          <div class="mobile-logo">
+            <div class="logo logo-lg">
+              <span class="text-sienna">Book</span>
+              <span class="text-gold">Sell</span>
+            </div>
+          </div>
+          
+          <div class="card border-gold/20 shadow-lg animate-fadeIn">
+            <div class="card-header space-y-1">
+              <h2 class="text-2xl font-bold text-center text-saddle-brown">
+                Welcome to BookSell
+              </h2>
+              <p class="text-center text-gray-600">
+                Enter your details to access your account
+              </p>
+            </div>
+            
+            <div class="tabs">
+              <div class="tabs-list grid grid-cols-3 mb-4">
+                <button class="tab-trigger active" data-tab="login">Login</button>
+                <button class="tab-trigger" data-tab="signup">Sign Up</button>
+                <button class="tab-trigger" data-tab="forgot">Forgot Password</button>
+              </div>
+              
+              <!-- Login Form -->
+              <div class="tab-content active transition-all" id="login-tab">
+                <form id="login-form" class="space-y-4">
+                  <div class="card-content space-y-4">
+                    <div class="space-y-2">
+                      <label for="login-email" class="text-saddle-brown">
+                        Email
+                      </label>
+                      <div class="relative">
+                        <i data-feather="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="login-email" 
+                          type="email" 
+                          placeholder="john@example.com" 
+                          class="pl-10 border-gray-300 focus:border-gold focus:ring-gold"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex justify-between">
+                        <label for="login-password" class="text-saddle-brown">
+                          Password
+                        </label>
+                      </div>
+                      <div class="relative">
+                        <i data-feather="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="login-password" 
+                          type="password" 
+                          class="pl-10 pr-10 border-gray-300 focus:border-gold focus:ring-gold" 
+                          placeholder="********"
+                          required
+                        />
+                        <button 
+                          type="button"
+                          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 toggle-password"
+                        >
+                          <i data-feather="eye" class="h-4 w-4 password-show"></i>
+                          <i data-feather="eye-off" class="h-4 w-4 password-hide hidden"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer flex flex-col">
+                    <button type="submit" class="w-full bg-gold hover:bg-gold/90 text-white">
+                      Sign In
+                    </button>
+                  </div>
+                </form>
+              </div>
+              
+              <!-- Sign Up Form -->
+              <div class="tab-content transition-all" id="signup-tab">
+                <form id="signup-form" class="space-y-4">
+                  <div class="card-content space-y-4">
+                    <div class="space-y-2">
+                      <label for="signup-name" class="text-saddle-brown">
+                        Full Name
+                      </label>
+                      <div class="relative">
+                        <i data-feather="user" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="signup-name" 
+                          type="text" 
+                          placeholder="John Doe" 
+                          class="pl-10 border-gray-300 focus:border-gold focus:ring-gold"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label for="signup-email" class="text-saddle-brown">
+                        Email
+                      </label>
+                      <div class="relative">
+                        <i data-feather="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="signup-email" 
+                          type="email" 
+                          placeholder="john@example.com" 
+                          class="pl-10 border-gray-300 focus:border-gold focus:ring-gold"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label for="signup-password" class="text-saddle-brown">
+                        Password
+                      </label>
+                      <div class="relative">
+                        <i data-feather="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="signup-password" 
+                          type="password" 
+                          class="pl-10 pr-10 border-gray-300 focus:border-gold focus:ring-gold" 
+                          placeholder="********"
+                          required
+                        />
+                        <button 
+                          type="button"
+                          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 toggle-password"
+                        >
+                          <i data-feather="eye" class="h-4 w-4 password-show"></i>
+                          <i data-feather="eye-off" class="h-4 w-4 password-hide hidden"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="w-full bg-gold hover:bg-gold/90 text-white">
+                      Create Account
+                    </button>
+                  </div>
+                </form>
+              </div>
+              
+              <!-- Forgot Password Form -->
+              <div class="tab-content transition-all" id="forgot-tab">
+                <form id="forgot-form" class="space-y-4">
+                  <div class="card-content space-y-4">
+                    <div class="text-center mb-4 text-gray-600">
+                      <p>Enter your email address and we'll send you a link to reset your password.</p>
+                    </div>
+                    <div class="space-y-2">
+                      <label for="reset-email" class="text-saddle-brown">
+                        Email
+                      </label>
+                      <div class="relative">
+                        <i data-feather="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                        <input 
+                          id="reset-email" 
+                          type="email" 
+                          placeholder="john@example.com" 
+                          class="pl-10 border-gray-300 focus:border-gold focus:ring-gold"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="w-full bg-gold hover:bg-gold/90 text-white">
+                      Send Reset Link
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="tab-content transition-all" id="reset-tab">
+            <form id="reset-form" class="space-y-4">
+              <div class="card-content space-y-4">
+                <div class="space-y-2">
+                  <label for="reset-email" class="text-saddle-brown">Email</label>
+                  <div class="relative">
+                    <i data-feather="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                    <input
+                      id="reset-email"
+                      type="email"
+                      placeholder="john@example.com"
+                      class="pl-10 border-gray-300 focus:border-gold focus:ring-gold"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label for="reset-code" class="text-saddle-brown">Reset Code</label>
+                  <input
+                    id="reset-code"
+                    type="text"
+                    placeholder="Enter reset code"
+                    class="border-gray-300 focus:border-gold focus:ring-gold"
+                    required
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label for="new-password" class="text-saddle-brown">New Password</label>
+                  <div class="relative">
+                    <i data-feather="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4"></i>
+                    <input
+                      id="new-password"
+                      type="password"
+                      class="pl-10 pr-10 border-gray-300 focus:border-gold focus:ring-gold"
+                      placeholder="********"
+                      required
+                    />
+                    <button
+                      type="button"
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 toggle-password"
+                    >
+                      <i data-feather="eye" class="h-4 w-4 password-show"></i>
+                      <i data-feather="eye-off" class="h-4 w-4 password-hide hidden"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="w-full bg-gold hover:bg-gold/90 text-white">
+                  Reset Password
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <p class="text-center mt-6 text-gray-600 text-sm">
+            &copy; <span id="current-year"></span> BookSell. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container for Notifications -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+    
+    <!-- JavaScript -->
+    <script src="script/loginscript.js"></script>
+  </body>
+</html>

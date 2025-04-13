@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sell Your Books - BookSell</title>
+    <meta name="description" content="List your pre-loved books for sale on BookishBazaar" />
+    <link rel="stylesheet" href="styles/postad.css">
+  </head>
+  <body class="bg-bookish-cream">
+    <header class="bg-bookish-brown-dark text-bookish-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-2xl font-serif font-bold">BookSell</div>
+        <nav>
+          <ul class="flex space-x-6">
+            <li><a href="index.html" class="text-bookish-white hover:text-bookish-gold">Home</a></li>
+            <li><a href="#" class="text-bookish-white hover:text-bookish-gold">Categories</a></li>
+            <li><a href="post-ad.html" class="text-bookish-white hover:text-bookish-gold">Sell</a></li>
+            <li><a href="profile.html" class="text-bookish-white hover:text-bookish-gold">Account</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+      <div class="mb-8 text-center">
+        <h1 class="text-3xl font-serif font-bold text-bookish-brown-dark mb-2">
+          Sell Your Books
+        </h1>
+        <p class="text-bookish-gray-medium max-w-2xl mx-auto">
+          List your pre-loved books for sale. Fill in the details below to create your listing
+          and reach thousands of book lovers in our marketplace.
+        </p>
+      </div>
+      
+      <form id="bookPostForm" class="w-full max-w-4xl mx-auto">
+        <div class="card border-bookish-brown-medium shadow-lg">
+          <div class="card-header bg-bookish-brown-dark text-bookish-white rounded-t-lg p-4">
+            <h2 class="text-2xl font-serif text-center">Sell Your Book</h2>
+          </div>
+          
+          <div class="card-content space-y-6 p-6 bg-bookish-cream">
+            <!-- Book Title -->
+            <div class="space-y-2">
+              <label for="bookTitle" class="text-lg font-medium">Book Title*</label>
+              <input
+                id="bookTitle"
+                placeholder="Enter the title of your book"
+                class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                required
+              />
+            </div>
+            
+            <!-- Entry Method Tabs -->
+            <div class="border-b border-bookish-brown-medium/30">
+              <div class="flex space-x-2">
+                <button
+                  type="button"
+                  id="manualEntryTab"
+                  class="px-4 py-2 text-bookish-brown-dark font-medium border-b-2 border-bookish-brown-dark"
+                >
+                  Manual Entry
+                </button>
+                <button
+                  type="button"
+                  id="isbnLookupTab"
+                  class="px-4 py-2 text-bookish-gray-medium hover:text-bookish-brown-dark"
+                >
+                  ISBN Lookup
+                </button>
+              </div>
+            </div>
+            
+            <!-- ISBN Lookup Form (hidden initially) -->
+            <div id="isbnLookupSection" class="hidden space-y-4">
+              <div class="flex space-x-2">
+                <input 
+                  id="isbnInput" 
+                  placeholder="Enter ISBN number" 
+                  class="flex-1 px-3 py-2 border border-bookish-brown-medium rounded-md"
+                />
+                <button 
+                  type="button" 
+                  id="lookupButton"
+                  class="bg-bookish-brown-dark hover:bg-bookish-brown-medium text-white px-4 py-2 rounded-md"
+                >
+                  Look Up
+                </button>
+              </div>
+              <p class="text-sm text-bookish-gray-medium">
+                Using ISBN will auto-fill most details. You'll still need to add condition, photos, quantity, and pricing.
+              </p>
+            </div>
+            
+            <!-- Book Classification -->
+            <div id="bookClassification" class="space-y-4">
+              <!-- Book Type -->
+              <div class="space-y-2">
+                <label for="bookType" class="text-lg font-medium">Book Type*</label>
+                <select
+                  id="bookType"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  required
+                >
+                  <option value="">Select book type</option>
+                  <option value="college">College Book</option>
+                  <option value="exam">Exam/Test Preparation Book</option>
+                  <option value="reading">Reading Book</option>
+                  <option value="school">School Book</option>
+                </select>
+              </div>
+              
+              <!-- Category (disabled initially) -->
+              <div class="space-y-2">
+                <label for="category" class="text-lg font-medium">Category*</label>
+                <select
+                  id="category"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  disabled
+                  required
+                >
+                  <option value="">Select category</option>
+                </select>
+              </div>
+              
+              <!-- Subcategory (disabled initially) -->
+              <div class="space-y-2">
+                <label for="subcategory" class="text-lg font-medium">Subcategory*</label>
+                <select
+                  id="subcategory"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  disabled
+                  required
+                >
+                  <option value="">Select subcategory</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Book Info - MRP, Author, Edition -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="space-y-2">
+                <label for="mrp" class="text-lg font-medium">MRP (₹)*</label>
+                <input
+                  id="mrp"
+                  type="number"
+                  placeholder="Original price"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  required
+                />
+              </div>
+              
+              <div class="space-y-2">
+                <label for="author" class="text-lg font-medium">Author Name*</label>
+                <input
+                  id="author"
+                  placeholder="Book author"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  required
+                />
+              </div>
+              
+              <div class="space-y-2">
+                <label for="edition" class="text-lg font-medium">Edition Year*</label>
+                <input
+                  id="edition"
+                  placeholder="Year of publication"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  required
+                />
+              </div>
+            </div>
+            
+            <!-- Book Condition -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="condition" class="text-lg font-medium">Book Condition*</label>
+                <select
+                  id="condition"
+                  class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                  required
+                >
+                  <option value="">Select condition...</option>
+                  <option value="excellent">Excellent</option>
+                  <option value="good">Good</option>
+                  <option value="fair">Fair</option>
+                </select>
+              </div>
+              
+              <div class="space-y-4">
+                <label for="conditionRating" class="text-lg font-medium">
+                  Condition Rating (1-10)*
+                </label>
+                <div class="pt-6 px-2">
+                  <input 
+                    type="range" 
+                    id="conditionRating" 
+                    min="1" 
+                    max="10" 
+                    value="5" 
+                    class="w-full"
+                  />
+                  <div class="relative w-full mt-2">
+                    <div class="flex justify-between mt-1 px-1">
+                      <span class="text-xs">Poor</span>
+                      <span class="text-xs">Average</span>
+                      <span class="text-xs">Excellent</span>
+                    </div>
+                    <div class="text-center mt-3">
+                      <span class="font-medium text-bookish-brown-dark" id="ratingDisplay">
+                        5/10 - Average
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Book Description -->
+            <div class="space-y-2">
+              <label for="description" class="text-lg font-medium">
+                Book Description* (10-300 words)
+              </label>
+              <textarea
+                id="description"
+                placeholder="Describe your book, its condition, special features, etc."
+                class="w-full min-h-[120px] px-3 py-2 border border-bookish-brown-medium rounded-md"
+                required
+              ></textarea>
+              <p class="text-sm text-bookish-gray-medium" id="wordCount">
+                Word count: 0/300
+              </p>
+            </div>
+            
+            <!-- Image Upload -->
+            <div class="space-y-2">
+              <label class="text-lg font-medium">
+                Book Photos* (4-10 photos)
+              </label>
+              <div class="space-y-4">
+                <div id="previewContainer" class="flex flex-wrap gap-4">
+                  <!-- Image previews will be added here -->
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="image-upload"
+                      class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-bookish-brown-medium rounded-md cursor-pointer hover:bg-bookish-brown-medium/5 transition-colors"
+                    >
+                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-3 text-bookish-brown-medium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="text-sm text-bookish-gray-medium">
+                          <span class="font-medium">Click to upload images</span>
+                          <br />
+                          <span id="imagesRequired" class="text-red-500">
+                            4 more required
+                          </span>
+                        </p>
+                      </div>
+                      <input
+                        id="image-upload"
+                        type="file"
+                        class="hidden"
+                        accept="image/*"
+                        multiple
+                      />
+                    </label>
+                    <p class="text-xs text-bookish-gray-medium mt-1 text-center">
+                      Upload 4-10 images of your book
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <label
+                      for="video-upload"
+                      class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-bookish-brown-medium rounded-md cursor-pointer hover:bg-bookish-brown-medium/5 transition-colors"
+                    >
+                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-3 text-bookish-brown-medium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 15V19a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
+                          <polyline points="17 8 21 12 17 16"></polyline>
+                          <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <p class="text-sm text-bookish-gray-medium">
+                          <span class="font-medium" id="videoUploadText">
+                            Upload a video (optional)
+                          </span>
+                          <br />
+                          <span>Show your book in action</span>
+                        </p>
+                      </div>
+                      <input
+                        id="video-upload"
+                        type="file"
+                        class="hidden"
+                        accept="video/*"
+                      />
+                    </label>
+                    <p class="text-xs text-bookish-gray-medium mt-1 text-center">
+                      Add a short video of your book (flipping pages, etc.)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quantity Available -->
+            <div class="space-y-2">
+              <label for="quantity" class="text-lg font-medium">
+                Quantity Available*
+              </label>
+              <select
+                id="quantity"
+                class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="custom">Enter custom quantity...</option>
+              </select>
+            </div>
+            
+            <!-- Pricing Section -->
+            <div class="space-y-4 p-4 bg-bookish-white rounded-md border border-bookish-brown-medium">
+              <h3 class="text-lg font-medium text-bookish-brown-dark">Pricing Details</h3>
+              
+              <!-- Your Selling Price -->
+              <div class="space-y-2 relative">
+                <label for="price" class="font-medium">
+                  Your Selling Price (₹)*
+                </label>
+                <div class="relative">
+                  <input
+                    id="price"
+                    type="number"
+                    placeholder="Enter your selling price"
+                    class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <!-- Shipping Options -->
+              <div class="space-y-2 relative">
+                <label class="font-medium">Shipping*</label>
+                <div class="flex items-center space-x-2 mb-3">
+                  <div class="relative inline-block w-10 align-middle select-none">
+                    <input 
+                      type="checkbox" 
+                      id="free-shipping" 
+                      class="opacity-0 absolute w-5 h-5"
+                    />
+                    <label 
+                      for="free-shipping" 
+                      class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                    ></label>
+                  </div>
+                  <label for="free-shipping" class="cursor-pointer">
+                    Free Shipping
+                  </label>
+                </div>
+                
+                <div id="shippingPriceContainer">
+                  <input
+                    id="shippingPrice"
+                    type="number"
+                    placeholder="Enter shipping charges"
+                    class="w-full px-3 py-2 border border-bookish-brown-medium rounded-md"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <!-- Advertisement Option -->
+              <div class="mt-4 p-3 bg-bookish-gold/10 rounded-md border border-bookish-gold">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <label for="advertise" class="font-medium flex items-center">
+                      <span class="text-bookish-brown-dark">Advertise your book</span>
+                      <span class="ml-2 text-xs bg-bookish-gold text-white px-2 py-0.5 rounded-full">
+                        SELL FASTER!
+                      </span>
+                    </label>
+                    <p class="text-sm text-bookish-gray-medium mt-1">
+                      Your book will get premium placement in search results (10% commission applies)
+                    </p>
+                  </div>
+                  <div class="relative inline-block w-10 align-middle select-none">
+                    <input 
+                      type="checkbox" 
+                      id="advertise" 
+                      class="opacity-0 absolute w-5 h-5"
+                    />
+                    <label 
+                      for="advertise" 
+                      class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                    ></label>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Earnings Calculation -->
+              <div class="mt-4 p-3 bg-bookish-cream rounded-md border border-bookish-brown-medium">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">Your Earnings:</span>
+                  <span class="text-xl font-bold text-bookish-brown-dark" id="earnings">
+                    ₹0.00
+                  </span>
+                </div>
+                <p id="adCommission" class="text-sm text-bookish-gray-medium mt-1 hidden">
+                  Includes 10% advertising commission
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-footer bg-bookish-cream border-t border-bookish-brown-medium/30 p-6 flex justify-center rounded-b-lg">
+            <button 
+              type="submit" 
+              class="w-full max-w-md bg-bookish-brown-dark hover:bg-bookish-brown-medium text-white text-lg py-6 rounded-md"
+            >
+              POST BOOK
+            </button>
+          </div>
+        </div>
+      </form>
+    </main>
+    
+    <footer class="bg-bookish-brown-dark text-bookish-white py-6">
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">
+          &copy; 2025 BookishBazaar. All rights reserved.
+        </p>
+        <div class="mt-2 flex justify-center space-x-4 text-xs">
+          <a href="#" class="text-bookish-white/80 hover:text-bookish-gold">
+            Privacy Policy
+          </a>
+          <a href="#" class="text-bookish-white/80 hover:text-bookish-gold">
+            Terms of Service
+          </a>
+          <a href="#" class="text-bookish-white/80 hover:text-bookish-gold">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </footer>
+    
+    <div id="toast" class="fixed right-4 bottom-4 p-4 rounded-md bg-bookish-brown-dark text-white shadow-lg transform translate-y-full opacity-0 transition-all duration-300">
+      <div id="toastTitle" class="font-bold"></div>
+      <div id="toastMessage"></div>
+    </div>
+    
+    <script src="script/postad.js"></script>
+  </body>
+</html>

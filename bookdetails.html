@@ -1,0 +1,176 @@
+<!-- bookdetails.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookSell - Book Details</title>
+  <link rel="stylesheet" href="styles/bookdetails.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo-container">
+        <a href="/" class="logo-link">
+          <div class="logo">
+            <span class="logo-text">B</span>
+          </div>
+          <span class="brand-name">BookBuy</span>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <a href="browse.html" class="nav-link">Browse</a>
+        <a href="wishlist.html" class="nav-link">Wishlist</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button notification-button">
+          <i data-lucide="bell" size="20"></i>
+          <span class="notification-badge">0</span>
+        </button>
+        <button class="icon-button cart-button">
+          <i data-lucide="shopping-cart" size="20"></i>
+          <span class="notification-badge">0</span>
+        </button>
+        <button class="icon-button profile-button">
+          <i data-lucide="user" size="20"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div id="loading" class="loading">Loading book details...</div>
+<div id="error" class="error" style="display: none;">Failed to load book details.</div>
+    <div class="product-grid">
+      <!-- Left Column - Images -->
+      <div class="image-column">
+        <div class="main-image-container">
+          <img id="mainImage" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80" alt="To Kill a Mockingbird" class="main-image">
+        </div>
+        <div class="thumbnail-grid">
+          <div class="thumbnail active" data-image="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80" alt="To Kill a Mockingbird - view 1" class="thumbnail-image">
+          </div>
+          <div class="thumbnail" data-image="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="To Kill a Mockingbird - view 2" class="thumbnail-image">
+          </div>
+          <div class="thumbnail" data-image="https://images.unsplash.com/photo-1629992101753-56d196c8aabb?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1629992101753-56d196c8aabb?auto=format&fit=crop&w=800&q=80" alt="To Kill a Mockingbird - view 3" class="thumbnail-image">
+          </div>
+          <div class="thumbnail" data-image="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" alt="To Kill a Mockingbird - view 4" class="thumbnail-image">
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Details -->
+      <div class="details-column">
+        <div class="book-header">
+          <h1 class="book-title">To Kill a Mockingbird</h1>
+          <div class="author-info">
+            <i data-lucide="book-open" class="icon-small"></i>
+            <span>By Harper Lee</span>
+          </div>
+          <div class="book-meta">
+            <span class="condition-badge">Good Condition</span>
+            <div class="meta-stats">
+              <div class="meta-item">
+                <i data-lucide="calendar" class="icon-small"></i>
+                <span>Added March 15, 2024</span>
+              </div>
+              <div class="meta-item">
+                <i data-lucide="eye" class="icon-small"></i>
+                <span>1,247 views</span>
+              </div>
+            </div>
+          </div>
+          <div class="edition-info">Edition: Vintage Classics, 2015</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="pricing-section">
+          <div class="price-display">
+            <span class="selling-price">₹299</span>
+            <span class="mrp">₹499</span>
+            <span class="discount">40% off</span>
+          </div>
+          <div class="shipping-info">+ ₹50 shipping charges</div>
+          <div class="stock-info">
+            <span class="in-stock">In Stock (5 available)</span>
+          </div>
+        </div>
+
+        <div class="quantity-selector">
+          <span class="label">Quantity:</span>
+          <div class="quantity-control">
+            <button id="decrementBtn" class="quantity-btn">-</button>
+            <span id="quantityDisplay" class="quantity-value">1</span>
+            <button id="incrementBtn" class="quantity-btn">+</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="buyNowBtn" class="primary-btn">Buy Now</button>
+          <button id="addToCartBtn" class="secondary-btn">
+            <i data-lucide="shopping-cart" class="icon-small"></i>
+            Add to Cart
+          </button>
+          <button id="wishlistBtn" class="ghost-btn">
+            <i data-lucide="heart" class="icon-small"></i>
+            Wishlist
+          </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="description-section">
+          <h2 class="section-title">Book Description</h2>
+          <p class="description-text">A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice. It views a world of great beauty and savage inequities through the eyes of a young girl, as her father—a crusading local lawyer—risks everything to defend a black man unjustly accused of a terrible crime.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="seller-card">
+          <h3 class="seller-card-title">Seller Information</h3>
+          <div class="seller-details">
+            <div class="seller-info-item">
+              <i data-lucide="user" class="icon-small"></i>
+              <span class="seller-name">Classic Books Store</span>
+            </div>
+            <div class="seller-info-item">
+              <i data-lucide="map-pin" class="icon-small"></i>
+              <span class="seller-location">Ships from: 110001</span>
+            </div>
+            <button id="viewSellerBooksBtn" class="seller-books-btn">View Seller's Books</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2 class="section-title-large">You May Also Like</h2>
+      <div class="recommendations-grid">
+        <!-- Recommendation Cards -->
+        </div>
+
+    <!-- Image Preview Dialog -->
+    <div id="imagePreview" class="dialog-overlay">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h3 class="dialog-title">To Kill a Mockingbird</h3>
+          <button id="closePreviewBtn" class="close-button">&times;</button>
+        </div>
+        <div class="preview-image-container">
+          <img id="previewImage" src="" alt="To Kill a Mockingbird" class="preview-image">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script/bookdetails.js"></script>
+</body>
+</html>

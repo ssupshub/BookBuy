@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookSell - My Orders</title>
+  <link rel="stylesheet" href="styles/myorders.css">
+</head>
+<body class="min-h-screen bg-booksell-beige">
+  <!-- Header -->
+  <header class="bg-white border-b border-booksell-beige shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <a href="#" class="flex items-center gap-2">
+          <div class="logo-container">
+            <span class="logo-text">B</span>
+          </div>
+          <span class="brand-name">BookSell</span>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link active">Dashboard</a>
+        <a href="#" class="nav-link">Browse</a>
+        <a href="#" class="nav-link">Wishlist</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="icon-button">
+          <span class="icon">🔔</span>
+          <span class="notification-badge">3</span>
+        </button>
+        <button class="icon-button">
+          <span class="icon">🛒</span>
+          <span class="notification-badge">2</span>
+        </button>
+        <button class="icon-button">
+          <span class="icon">👤</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-6">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="page-title">My Orders</h1>
+        <p class="page-subtitle">Track, manage, and review your book orders</p>
+      </div>
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search orders..." class="search-input">
+      </div>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stats-card">
+        <div class="stats-icon-container gold">
+          <span class="stats-icon">🛒</span>
+        </div>
+        <div>
+          <p class="stats-title">Active Orders</p>
+          <p class="stats-value">2</p>
+        </div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon-container blue">
+          <span class="stats-icon">📦</span>
+        </div>
+        <div>
+          <p class="stats-title">Processing</p>
+          <p class="stats-value">1</p>
+        </div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon-container green">
+          <span class="stats-icon">✓</span>
+        </div>
+        <div>
+          <p class="stats-title">Delivered</p>
+          <p class="stats-value">27</p>
+        </div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon-container brown">
+          <span class="stats-icon">📚</span>
+        </div>
+        <div>
+          <p class="stats-title">Books Purchased</p>
+          <p class="stats-value">42</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tabs Section -->
+    <div class="tabs-section">
+      <div class="tabs-header">
+        <button class="tab-button active" data-tab="active">Active Orders</button>
+        <button class="tab-button" data-tab="past">Past Orders</button>
+        <button class="tab-button" data-tab="all">All Orders</button>
+      </div>
+      
+      <!-- Active Orders Tab Content -->
+      <div class="tab-content" id="active-tab">
+        <!-- Order Status Card -->
+        <div class="order-detail-card">
+          <div class="order-detail-header">
+            <h3>Order #ORD-3841 Status</h3>
+          </div>
+          <div class="order-progress">
+            <div class="progress-step complete">
+              <div class="progress-circle">✓</div>
+              <div class="progress-text">
+                <div>Order Placed</div>
+                <div>March 28, 2025</div>
+              </div>
+            </div>
+            <div class="progress-line complete"></div>
+            <div class="progress-step complete">
+              <div class="progress-circle">✓</div>
+              <div class="progress-text">
+                <div>Processing</div>
+                <div>March 29, 2025</div>
+              </div>
+            </div>
+            <div class="progress-line complete"></div>
+            <div class="progress-step active">
+              <div class="progress-circle">🚚</div>
+              <div class="progress-text">
+                <div>Shipped</div>
+                <div>March 30, 2025</div>
+              </div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+              <div class="progress-circle">🏠</div>
+              <div class="progress-text">
+                <div>Delivered</div>
+                <div>-</div>
+              </div>
+            </div>
+          </div>
+          <div class="tracking-info">
+            <div>
+              <h4>Tracking Information</h4>
+              <p>Tracking Number: <span>TRK3842392304</span></p>
+              <p>Estimated Delivery: <span>April 8, 2025</span></p>
+            </div>
+            <button class="primary-button">Track Package</button>
+          </div>
+          <div class="shipping-address">
+            <h4>Shipping Address</h4>
+            <p>123 Bookworm Lane, Apt 4B, Reading, CA 90210, United States</p>
+          </div>
+        </div>
+        
+        <h3 class="section-title">Recent Orders</h3>
+        
+        <!-- Order Card 1 -->
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <h3>Order #ORD-3842</h3>
+              <div class="order-date">
+                <span>📅</span>
+                <span>April 2, 2025</span>
+              </div>
+            </div>
+            <div class="order-status">
+              <span class="status-badge processing">Processing</span>
+              <button class="ghost-button">View Details</button>
+            </div>
+          </div>
+          <div class="order-card-content">
+            <div class="order-items">
+              <div class="order-item">
+                <div class="book-thumbnail"></div>
+                <div>
+                  <h4>The Midnight Library</h4>
+                  <p>Matt Haig</p>
+                  <p class="book-price">$16.99</p>
+                </div>
+              </div>
+              <div class="order-item">
+                <div class="book-thumbnail"></div>
+                <div>
+                  <h4>Klara and the Sun</h4>
+                  <p>Kazuo Ishiguro</p>
+                  <p class="book-price">$24.99</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-card-footer">
+            <div>
+              <span>Total:</span>
+              <span class="order-total">$78.95</span>
+            </div>
+            <div>
+              <button class="outline-button">Help</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Order Card 2 -->
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <h3>Order #ORD-3841</h3>
+              <div class="order-date">
+                <span>📅</span>
+                <span>March 28, 2025</span>
+              </div>
+            </div>
+            <div class="order-status">
+              <span class="status-badge shipped">Shipped</span>
+              <button class="ghost-button">View Details</button>
+            </div>
+          </div>
+          <div class="order-card-content">
+            <div class="order-items">
+              <div class="order-item">
+                <div class="book-thumbnail"></div>
+                <div>
+                  <h4>Project Hail Mary</h4>
+                  <p>Andy Weir</p>
+                  <p class="book-price">$34.98</p>
+                </div>
+              </div>
+            </div>
+            <div class="shipping-info">
+              <h4>Shipping Information</h4>
+              <div class="shipping-details">
+                <div>
+                  <span>Tracking Number:</span>
+                  <span>TRK3842392304</span>
+                </div>
+                <div>
+                  <span>Estimated Delivery:</span>
+                  <span>April 8, 2025</span>
+                </div>
+              </div>
+              <button class="outline-button">Track Package</button>
+            </div>
+          </div>
+          <div class="order-card-footer">
+            <div>
+              <span>Total:</span>
+              <span class="order-total">$34.98</span>
+            </div>
+            <div>
+              <button class="outline-button">Help</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Past Orders Tab Content -->
+      <div class="tab-content hidden" id="past-tab">
+        <!-- Order Card -->
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <h3>Order #ORD-3840</h3>
+              <div class="order-date">
+                <span>📅</span>
+                <span>March 15, 2025</span>
+              </div>
+            </div>
+            <div class="order-status">
+              <span class="status-badge delivered">Delivered</span>
+              <button class="ghost-button">View Details</button>
+            </div>
+          </div>
+          <div class="order-card-content">
+            <div class="order-items">
+              <div class="order-item">
+                <div class="book-thumbnail"></div>
+                <div>
+                  <h4>The Lincoln Highway</h4>
+                  <p>Amor Towles</p>
+                  <p class="book-price">$42.99</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-card-footer">
+            <div>
+              <span>Total:</span>
+              <span class="order-total">$42.99</span>
+            </div>
+            <div>
+              <button class="outline-button">Write Review</button>
+              <button class="outline-button">Help</button>
+            </div>
+          </div>
+        </div>
+        <div class="load-more">
+          <button class="outline-button">Load More</button>
+        </div>
+      </div>
+      
+      <!-- All Orders Tab Content -->
+      <div class="tab-content hidden" id="all-tab">
+        <div class="load-more">
+          <button class="outline-button">Load More</button>
+        </div>
+      </div>
+    </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-booksell-beige py-6">
+    <div class="container mx-auto px-4">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-container-small">
+              <span class="logo-text-small">B</span>
+            </div>
+            <span class="brand-name">BookSell</span>
+          </div>
+          <p>Your premium book marketplace</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Returns</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 BookSell. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script/myorders.js"></script>
+</body>
+</html>

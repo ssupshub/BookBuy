@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookSell - Seller Dashboard</title>
+  <link rel="stylesheet" href="styles/sellingorders.css">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-icons@latest/dist/umd/lucide.css">
+</head>
+<body class="bg-booksell-beige-light">
+  <header class="bg-white border-b border-booksell-beige shadow-sm">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="flex items-center space-x-2">
+          <span class="lucide-icon"><i data-lucide="book"></i></span>
+          <span class="font-serif text-2xl font-bold text-booksell-brown">BookSell</span>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-2">
+          <button class="btn btn-ghost flex items-center space-x-2">
+            <span class="lucide-icon"><i data-lucide="book-open"></i></span>
+            <span>My Books</span>
+          </button>
+          
+          <button class="btn btn-ghost relative flex items-center space-x-2">
+            <span class="lucide-icon"><i data-lucide="bell"></i></span>
+            <span>Notifications</span>
+            <span class="badge badge-gold" id="notification-badge">3</span>
+          </button>
+          
+          <button class="btn btn-ghost flex items-center space-x-2">
+            <span class="lucide-icon"><i data-lucide="user"></i></span>
+            <span>Profile</span>
+          </button>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button 
+          class="btn btn-ghost md:hidden"
+          id="mobile-menu-button"
+        >
+          <span class="lucide-icon"><i data-lucide="menu"></i></span>
+        </button>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav md:hidden py-4 space-y-2 hidden" id="mobile-nav">
+        <button class="btn btn-ghost w-full flex items-center justify-start space-x-2">
+          <span class="lucide-icon"><i data-lucide="book-open"></i></span>
+          <span>My Books</span>
+        </button>
+        
+        <button class="btn btn-ghost w-full relative flex items-center justify-start space-x-2">
+          <span class="lucide-icon"><i data-lucide="bell"></i></span>
+          <span>Notifications</span>
+          <span class="badge badge-gold mobile-badge" id="mobile-notification-badge">3</span>
+        </button>
+        
+        <button class="btn btn-ghost w-full flex items-center justify-start space-x-2">
+          <span class="lucide-icon"><i data-lucide="user"></i></span>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <div>
+        <h1 class="text-3xl font-serif font-bold text-booksell-brown">Seller Dashboard</h1>
+        <p class="text-booksell-gray">Manage your book orders and listings</p>
+      </div>
+      
+      <select id="filter-select" class="select-box">
+        <option value="all">All Orders</option>
+        <option value="pending">Pending</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+    
+    <!-- Order stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <div class="status-icon yellow">
+              <span class="lucide-icon"><i data-lucide="calendar"></i></span>
+            </div>
+            Pending Orders
+          </h3>
+        </div>
+        <div class="card-content">
+          <p class="text-3xl font-bold" id="pending-count">0</p>
+          <p class="text-sm text-booksell-gray">Awaiting your response</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <div class="status-icon green">
+              <span class="lucide-icon"><i data-lucide="check"></i></span>
+            </div>
+            Accepted Orders
+          </h3>
+        </div>
+        <div class="card-content">
+          <p class="text-3xl font-bold" id="accepted-count">0</p>
+          <p class="text-sm text-booksell-gray">Ready to ship</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <div class="status-icon red">
+              <span class="lucide-icon"><i data-lucide="x"></i></span>
+            </div>
+            Rejected Orders
+          </h3>
+        </div>
+        <div class="card-content">
+          <p class="text-3xl font-bold" id="rejected-count">0</p>
+          <p class="text-sm text-booksell-gray">No further action needed</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tabs-container mb-6">
+      <div class="tabs">
+        <button class="tab active" data-tab="all">All Orders</button>
+        <button class="tab" data-tab="pending">Pending</button>
+        <button class="tab" data-tab="accepted">Accepted</button>
+        <button class="tab" data-tab="rejected">Rejected</button>
+      </div>
+      
+      <div id="orders-container" class="orders-grid">
+        <!-- Orders will be inserted here by JavaScript -->
+      </div>
+      
+      <div id="empty-state" class="text-center py-12 hidden">
+        <span class="lucide-icon empty-icon"><i data-lucide="book"></i></span>
+        <h3 class="mt-4 text-xl font-serif font-medium text-booksell-gray-dark" id="empty-title">No Orders Found</h3>
+        <p class="text-booksell-gray" id="empty-description">You don't have any orders at the moment.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Order Card Template (Hidden) -->
+  <template id="order-card-template">
+    <div class="order-card book-card">
+      <div class="order-header">
+        <div class="flex justify-between items-center">
+          <h3 class="order-id text-lg font-medium"></h3>
+          <span class="order-status badge"></span>
+        </div>
+        <div class="text-sm opacity-90 flex items-center gap-1">
+          <span class="lucide-icon"><i data-lucide="calendar"></i></span>
+          <span class="order-date"></span>
+        </div>
+      </div>
+      
+      <div class="order-content">
+        <div class="flex gap-4">
+          <div class="book-thumbnail">
+            <span class="lucide-icon book-icon"><i data-lucide="book"></i></span>
+          </div>
+          
+          <div class="flex-grow">
+            <h3 class="book-title font-serif font-medium text-booksell-gray-dark"></h3>
+            <p class="text-sm text-booksell-gray">
+              <strong>Buyer:</strong> <span class="buyer-name"></span>
+            </p>
+            <p class="text-sm text-booksell-gray truncate max-w-xs">
+              <strong>Ship to:</strong> <span class="buyer-address"></span>
+            </p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="text-sm text-booksell-gray">
+                <strong>Qty:</strong> <span class="order-quantity"></span>
+              </div>
+              <div class="font-medium text-booksell-brown order-price"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="countdown-container mt-4 py-2 px-4 bg-booksell-beige rounded-md flex justify-between items-center hidden">
+          <span class="text-sm text-booksell-gray-dark">Time to respond:</span>
+          <span class="countdown-timer"></span>
+        </div>
+      </div>
+      
+      <div class="order-footer">
+        <div class="pending-actions hidden">
+          <button class="btn-reject">
+            <span class="lucide-icon"><i data-lucide="x"></i></span> Reject
+          </button>
+          <button class="btn-accept">
+            <span class="lucide-icon"><i data-lucide="check"></i></span> Accept
+          </button>
+        </div>
+        <div class="accepted-action hidden">
+          <button class="btn-view">
+            <span class="lucide-icon"><i data-lucide="eye"></i></span> View Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="script/sellingorders.js"></script>
+</body>
+</html>
