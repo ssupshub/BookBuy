@@ -1,639 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookSell - Buy & Sell Used Books Online</title>
-    <meta name="description" content="BookSell - The easiest way to buy and sell second-hand books online" />
-    <meta name="author" content="BookSell" />
-
-    <meta property="og:title" content="BookSell - Buy & Sell Used Books Online" />
-    <meta property="og:description" content="The easiest way to buy and sell second-hand books online" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'booksell-brown': '#8B4513',
-              'booksell-lightBrown': '#A0522D',
-              'booksell-gold': '#D4AF37',
-              'booksell-cream': '#F5F5DC',
-              'booksell-beige': '#F5F5DC',
-            },
-            fontFamily: {
-              'playfair': ['"Playfair Display"', 'serif'],
-              'opensans': ['"Open Sans"', 'sans-serif'],
-            },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-            },
-          }
-        }
-      }
-    </script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/index.css">
-  </head>
-
-  <body class="bg-booksell-beige text-foreground font-opensans">
-    <!-- Navigation -->
-     <header class="navbar">
-    <nav class="bg-white shadow-md py-4">
-      <div class="container mx-auto px-4 flex justify-between items-center">
-        <div class="flex items-center">
-          <a href="/" class="flex items-center">
-            <span class="text-2xl font-bold font-playfair text-booksell-brown">Book<span class="text-booksell-gold">Sell</span></span>
-          </a>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-6">
-          <a href="index.html" class="text-gray-700 hover:text-booksell-brown transition-colors font-playfair">Home</a>
-          <a href="post-ad.html" class="text-gray-700 hover:text-booksell-brown transition-colors font-playfair">Sell Books</a>
-          <a href="browse.html" class="text-gray-700 hover:text-booksell-brown transition-colors font-playfair">Buy Books</a>
-          <a href="account.html" class="text-gray-700 hover:text-booksell-brown transition-colors font-playfair">About</a>
-          <a href="contact.html" class="text-gray-700 hover:text-booksell-brown transition-colors font-playfair">Contact</a>
-          
-          <div class="relative" id="accountDropdown">
-            <button id="accountDropdownButton" class="flex items-center gap-1 bg-white hover:bg-booksell-cream border border-booksell-brown text-booksell-brown hover:text-booksell-brown shadow-sm px-3 py-1 rounded-md">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span class="font-playfair">Account</span>
-            </button>
-            
-            <div id="dropdownContent" class="hidden absolute right-0 mt-2 w-56 bg-white border border-booksell-cream shadow-lg rounded-lg p-1 animate-scale-in z-50">
-              <div class="font-playfair text-booksell-brown border-b border-booksell-cream pb-2 px-3 py-1">My Account</div>
-              <div class="bg-booksell-cream h-px"></div>
-              
-              <a href="login.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                  <polyline points="10 17 15 12 10 7"></polyline>
-                  <line x1="15" x2="3" y1="12" y2="12"></line>
-                </svg>
-                <span class="font-playfair">Login / Sign up</span>
-              </a>
-              <a href="profile.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <span class="font-playfair">Profile</span>
-              </a>
-              <a href="mylibrary.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                <span class="font-playfair">My Library</span>
-              </a>
-              <a href="browse.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                <span class="font-playfair">Browse</span>
-              </a>
-              <a href="sellingorders.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6Z"></path>
-                  <path d="M3 6h18"></path>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                <span class="font-playfair">My Selling Orders</span>
-              </a>
-              <a href="myorders.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6Z"></path>
-                  <path d="M3 6h18"></path>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                <span class="font-playfair">My Orders</span>
-              </a>
-              <a href="wishlist.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                </svg>
-                <span class="font-playfair">My Wishlist</span>
-              </a>
-              <a href="contact.html" class="flex items-center gap-2 hover:bg-booksell-cream rounded-md transition-colors cursor-pointer my-1 px-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-booksell-brown">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                  <path d="M12 17h.01"></path>
-                </svg>
-                <span class="font-playfair">Help and Support</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mobile Navigation Toggle -->
-        <div class="md:hidden flex items-center">
-          <button 
-            class="text-gray-700 hover:text-booksell-brown"
-            id="mobileMenuButton"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div class="md:hidden bg-white px-4 py-2 hidden" id="mobileMenu">
-        <div class="flex flex-col space-y-2">
-          <a href="index.html" class="text-gray-700 hover:text-booksell-brown py-2 font-playfair">Home</a>
-          <a href="post-ad.html" class="text-gray-700 hover:text-booksell-brown py-2 font-playfair">Sell Books</a>
-          <a href="browse.html" class="text-gray-700 hover:text-booksell-brown py-2 font-playfair">Buy Books</a>
-          <a href="account.html" class="text-gray-700 hover:text-booksell-brown py-2 font-playfair">About</a>
-          <a href="contact.html" class="text-gray-700 hover:text-booksell-brown py-2 font-playfair">Contact</a>
-          
-          <!-- Dropdown Items Expanded in Mobile View -->
-          <div class="py-2">
-            <div class="font-bold text-booksell-brown pb-1 font-playfair">My Account</div>
-            <div class="pl-2 flex flex-col space-y-2">
-              <a href="login.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                  <polyline points="10 17 15 12 10 7"></polyline>
-                  <line x1="15" x2="3" y1="12" y2="12"></line>
-                </svg>
-                <span>Login / Sign up</span>
-              </a>
-              <a href="profile.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <span>Profile</span>
-              </a>
-              <a href="mylibrary.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                <span>My Library</span>
-              </a>
-              <a href="sellingorders.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6Z"></path>
-                  <path d="M3 6h18"></path>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                <span>My Selling Orders</span>
-              </a>
-              <a href="myorders.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6Z"></path>
-                  <path d="M3 6h18"></path>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                <span>My Orders</span>
-              </a>
-              <a href="wishlist.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                </svg>
-                <span>My Wishlist</span>
-              </a>
-              <a href="contact.html" class="flex items-center gap-2 text-gray-700 hover:text-booksell-brown py-1 font-playfair">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                  <path d="M12 17h.01"></path>
-                </svg>
-                <span>Help and Support</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-b from-booksell-cream to-booksell-beige py-16 md:py-24">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center">
-          <div class="md:w-1/2 mb-8 md:mb-0">
-            <div class="reveal">
-              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-booksell-brown font-playfair">
-                Buy & Sell Books <span class="text-booksell-gold">The Smart Way</span>
-              </h1>
-              <p class="text-lg md:text-xl mb-8 text-gray-700 max-w-lg">
-                Find amazing deals on second-hand books or sell your old books easily on BookSell - 
-                your trusted marketplace for all book lovers.
-              </p>
-              
-              <!-- Book waste facts -->
-              <div class="bg-booksell-cream p-4 rounded-lg mb-8 border border-booksell-gold shadow-sm reveal">
-                <h3 class="text-lg font-semibold text-booksell-brown mb-2 font-playfair">Did You Know?</h3>
-                <ul class="space-y-2 text-sm text-gray-700">
-                  <li class="flex items-start">
-                    <span class="text-booksell-gold mr-2">•</span>
-                    <span>Over 640,000 tons of books are sent to landfills annually in the US alone</span>
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-booksell-gold mr-2">•</span>
-                    <span>Reusing just 1 ton of paper saves 17 trees and 7,000 gallons of water</span>
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-booksell-gold mr-2">•</span>
-                    <span>The average college student spends $1,200 on textbooks each year</span>
-                  </li>
-                </ul>
-              </div>
-              
-              <div class="flex flex-col sm:flex-row gap-4">
-                <a href="post-ad.html">
-                  <button class="bg-booksell-brown hover:bg-booksell-lightBrown text-white px-8 py-6 rounded-md text-lg">
-                    Sell Your Books
-                  </button>
-                </a>
-                <a href="browse.html">
-                  <button class="border border-booksell-brown text-booksell-brown hover:bg-booksell-brown hover:text-white px-8 py-6 rounded-md text-lg">
-                    Find Books
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="md:w-1/2 flex justify-center">
-            <div class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
-              <!-- Improved animated book with scroll-based opening/closing -->
-              <div class="book absolute top-10 left-16 w-48 h-64" style="perspective: 1000px;">
-                <div class="book-inner" style="transform-style: preserve-3d; transition: transform 0.5s ease;" id="animatedBook">
-                  <div class="book-cover" style="position: absolute; width: 100%; height: 100%; background-color: #A0522D; border-radius: 4px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); transform-origin: left center; backface-visibility: hidden; transition: transform 0.5s ease; display: flex; align-items: center; justify-content: center; color: #F5F5DC; font-weight: bold; font-size: 16px; padding: 10px; text-align: center; font-family: 'Playfair Display', serif;">
-                    BookSell
-                  </div>
-                  <div class="book-page" style="position: absolute; width: 100%; height: 100%; background-color: #F5F5DC; border-radius: 4px; display: flex; align-items: center; justify-content: center; padding: 20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);">
-                    <div class="book-content" style="font-size: 14px; line-height: 1.4; color: #8B4513; font-family: 'Playfair Display', serif; text-align: center;">
-                      BookSell: Your marketplace for buying and selling second-hand books at the best prices.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="book absolute top-20 left-24 w-48 h-64 animate-float" style="animation-delay: 0.5s;">
-                <div class="book-cover bg-booksell-gold rounded-md shadow-lg w-full h-full"></div>
-              </div>
-              <div class="book absolute top-30 left-32 w-48 h-64 animate-float" style="animation-delay: 1s;">
-                <div class="book-cover bg-booksell-cream rounded-md shadow-lg w-full h-full"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sell Section -->
-    <section id="sell" class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16 reveal">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-booksell-brown">Sell Old Books Online</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Convert your old books into cash in three simple steps. Our platform makes selling books quick, secure, and hassle-free.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">1</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Post an Ad</h3>
-            <p class="text-gray-600">Take pictures of your books and create a listing with all the details in minutes.</p>
-          </div>
-          
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">2</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Set Your Price</h3>
-            <p class="text-gray-600">Choose a competitive price for your books to attract potential buyers.</p>
-          </div>
-          
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">3</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Get Paid</h3>
-            <p class="text-gray-600">Receive money directly into your bank account or UPI once the books are sold.</p>
-          </div>
-        </div>
-
-        <div class="text-center reveal">
-          <button class="bg-booksell-brown hover:bg-booksell-lightBrown text-white px-8 py-6 rounded-md text-lg">
-            Sell Now
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Buy Section -->
-    <section id="buy" class="py-16 md:py-24 bg-booksell-cream">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16 reveal">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-booksell-brown">Buy Second-Hand Books Online</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Find your next favorite book at a fraction of the original price. Huge selection of pre-loved books just a click away.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">1</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Select Books</h3>
-            <p class="text-gray-600">Browse through thousands of second-hand books by category, author, or title.</p>
-          </div>
-          
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6Z"></path>
-                <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">2</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Place Order</h3>
-            <p class="text-gray-600">Securely make your payment through our trusted payment gateway.</p>
-          </div>
-          
-          <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md transition-transform hover:translate-y-[-5px] reveal">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-booksell-cream mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-booksell-brown">
-                <path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"></path>
-                <path d="M2 8h20"></path>
-                <path d="M2 12h20"></path>
-                <path d="M2 16h20"></path>
-                <path d="M22 18h1a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1"></path>
-                <path d="M7 6h10"></path>
-                <path d="M7 18h10"></path>
-                <path d="m12 6-2 12 2-12Z"></path>
-                <path d="m12 6 2 12-2-12Z"></path>
-              </svg>
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-booksell-brown text-white font-bold mb-4">3</div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Get Delivery</h3>
-            <p class="text-gray-600">Receive your books right at your doorstep with our reliable delivery partners.</p>
-          </div>
-        </div>
-
-        <div class="text-center reveal">
-          <button class="bg-booksell-brown hover:bg-booksell-lightBrown text-white px-8 py-6 rounded-md text-lg">
-            Browse Books
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-16 md:py-24 bg-booksell-cream">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16 reveal">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-booksell-brown">Why Choose BookSell</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            We provide the best experience for book lovers looking to buy or sell pre-loved books.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-transform hover:translate-y-[-5px] reveal" style="animation-delay: 0.15s;">
-            <div class="w-14 h-14 flex items-center justify-center rounded-full bg-booksell-brown mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-white">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Trusted Platform</h3>
-            <p class="text-gray-600">Secure transactions and verified sellers make BookSell a trusted platform for buying and selling books.</p>
-          </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-transform hover:translate-y-[-5px] reveal" style="animation-delay: 0.3s;">
-            <div class="w-14 h-14 flex items-center justify-center rounded-full bg-booksell-brown mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-white">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Quality Assurance</h3>
-            <p class="text-gray-600">All books are carefully checked for quality and condition before being listed on our platform.</p>
-          </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-transform hover:translate-y-[-5px] reveal" style="animation-delay: 0.45s;">
-            <div class="w-14 h-14 flex items-center justify-center rounded-full bg-booksell-brown mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-white">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Fast Delivery</h3>
-            <p class="text-gray-600">Get your books delivered quickly and safely to your doorstep with our reliable delivery partners.</p>
-          </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center transition-transform hover:translate-y-[-5px] reveal" style="animation-delay: 0.6s;">
-            <div class="w-14 h-14 flex items-center justify-center rounded-full bg-booksell-brown mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-white">
-                <circle cx="12" cy="8" r="6"></circle>
-                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-booksell-brown">Best Prices</h3>
-            <p class="text-gray-600">Find the best deals on second-hand books and get the highest value when selling your old books.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16 reveal">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-booksell-brown">What Our Users Say</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied book lovers who buy and sell on our platform.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-booksell-beige p-6 rounded-lg shadow-md reveal" style="animation-delay: 0.2s;">
-            <div class="mb-4">
-              <svg class="w-8 h-8 text-booksell-gold" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4zM24 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4z"/>
-              </svg>
-            </div>
-            <p class="text-gray-600 mb-4">BookSell made it so easy to sell my old college textbooks. I got a great price and the payment was processed quickly!</p>
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-booksell-brown flex items-center justify-center text-white font-bold">S</div>
-              <div class="ml-3">
-                <h4 class="font-medium text-booksell-brown">Sarah Johnson</h4>
-                <p class="text-sm text-gray-500">Book Seller</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="bg-booksell-beige p-6 rounded-lg shadow-md reveal" style="animation-delay: 0.4s;">
-            <div class="mb-4">
-              <svg class="w-8 h-8 text-booksell-gold" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4zM24 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4z"/>
-              </svg>
-            </div>
-            <p class="text-gray-600 mb-4">I found rare books at amazing prices. The condition descriptions were accurate and delivery was faster than expected.</p>
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-booksell-brown flex items-center justify-center text-white font-bold">M</div>
-              <div class="ml-3">
-                <h4 class="font-medium text-booksell-brown">Michael Chen</h4>
-                <p class="text-sm text-gray-500">Book Buyer</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="bg-booksell-beige p-6 rounded-lg shadow-md reveal" style="animation-delay: 0.6s;">
-            <div class="mb-4">
-              <svg class="w-8 h-8 text-booksell-gold" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4zM24 8v6c0 2.2-1.8 4-4 4h-2v4h2c4.4 0 8-3.6 8-8v-6h-4z"/>
-              </svg>
-            </div>
-            <p class="text-gray-600 mb-4">As an avid reader, BookSell has been a game-changer for me. I can buy books at affordable prices and sell them when I'm done.</p>
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-booksell-brown flex items-center justify-center text-white font-bold">P</div>
-              <div class="ml-3">
-                <h4 class="font-medium text-booksell-brown">Priya Sharma</h4>
-                <p class="text-sm text-gray-500">Regular Customer</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-booksell-brown text-white">
-      <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 class="text-xl font-playfair font-bold mb-4">Book<span class="text-booksell-gold">Sell</span></h3>
-            <p class="mb-4">Your trusted marketplace for buying and selling second-hand books.</p>
-            <div class="flex space-x-4">
-              <a href="#" class="hover:text-booksell-gold transition-colors">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-              </a>
-              <a href="#" class="hover:text-booksell-gold transition-colors">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
-                </svg>
-              </a>
-              <a href="#" class="hover:text-booksell-gold transition-colors">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.441 16.892c-2.102.144-6.784.144-8.883 0-2.276-.156-2.541-1.27-2.558-4.892.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0 2.277.156 2.541 1.27 2.559 4.892-.018 3.629-.285 4.736-2.559 4.892zm-6.441-7.234l4.917 2.338-4.917 2.346v-4.684z"/>
-                </svg>
-              </a>
-              <a href="#" class="hover:text-booksell-gold transition-colors">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          
-          <div>
-            <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Home</a></li>
-              <li><a href="#sell" class="hover:text-booksell-gold transition-colors">Sell Books</a></li>
-              <li><a href="#buy" class="hover:text-booksell-gold transition-colors">Buy Books</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">About Us</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 class="text-lg font-bold mb-4">Help & Support</h3>
-            <ul class="space-y-2">
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">FAQ</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Shipping Policy</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Return Policy</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Terms of Service</a></li>
-              <li><a href="#" class="hover:text-booksell-gold transition-colors">Privacy Policy</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-            <ul class="space-y-2">
-              <li class="flex items-start">
-                <svg class="w-5 h-5 mt-1 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3.445 17.827c-3.684 1.684-9.401-9.43-5.8-11.308l1.053-.519 1.746 3.409-1.042.513c-1.095.587 1.185 5.04 2.305 4.497l1.032-.505 1.76 3.397-1.054.516z"/>
-                </svg>
-                <span>+1 (123) 456-7890</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 mt-1 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z"/>
-                </svg>
-                <span>support@booksell.com</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 mt-1 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.218 19l-1.782-1.75 5.25-5.25-5.25-5.25 1.782-1.75 6.968 7-6.968 7z"/>
-                </svg>
-                <span>123 Book Street, Reading<br />City, RC 12345</span>
-              </li>
-            </ul>
-          </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookSell - Premium Book Marketplace</title>
+  <meta name="description" content="Buy and sell premium books online with BookSell - Your trusted marketplace">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <a href="/" class="logo">
+          <i data-lucide="book-open"></i>
+          <span>BookSell</span>
+        </a>
+        
+        <div class="nav-links">
+          <a href="/" class="nav-link active">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="post-ad.html" class="nav-link">Sell Books</a>
+          <a href="contact.html" class="nav-link">Contact</a>
         </div>
         
-        <div class="border-t border-gray-700 mt-8 pt-6">
-          <p class="text-sm text-center">© <span id="currentYear"></span> BookSell. All rights reserved.</p>
+        <div class="nav-actions">
+          <a href="wishlist.html" class="nav-icon">
+            <i data-lucide="heart"></i>
+          </a>
+          <a href="cart.html" class="nav-icon">
+            <i data-lucide="shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <button class="nav-icon dropdown-trigger">
+              <i data-lucide="user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="login.html" class="dropdown-item">Login / Sign Up</a>
+              <a href="profile.html" class="dropdown-item">Profile</a>
+              <a href="mylibrary.html" class="dropdown-item">My Library</a>
+              <a href="myorders.html" class="dropdown-item">My Orders</a>
+              <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
+            </div>
+          </div>
+          <button class="mobile-menu-toggle">
+            <i data-lucide="menu"></i>
+          </button>
         </div>
       </div>
-    </footer>
+      
+      <div class="mobile-menu">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="browse.html" class="mobile-link">Browse</a>
+        <a href="post-ad.html" class="mobile-link">Sell Books</a>
+        <a href="login.html" class="mobile-link">Login</a>
+        <a href="profile.html" class="mobile-link">Profile</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script src="script/script.js"></script>
-  </body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Your Premium Book <span class="text-accent">Marketplace</span>
+          </h1>
+          <p class="hero-subtitle">
+            Discover rare finds, sell your collection, and connect with fellow book lovers in our curated marketplace.
+          </p>
+          <div class="hero-actions">
+            <a href="browse.html" class="btn btn-primary">
+              <i data-lucide="search"></i>
+              Browse Books
+            </a>
+            <a href="post-ad.html" class="btn btn-secondary">
+              <i data-lucide="plus"></i>
+              Sell Your Books
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Books Listed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">5K+</span>
+              <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">Satisfaction Rate</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="book-stack">
+            <div class="book book-1"></div>
+            <div class="book book-2"></div>
+            <div class="book book-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose BookSell?</h2>
+        <p>Experience the future of book trading with our premium platform</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <h3>Secure Transactions</h3>
+          <p>Every transaction is protected with bank-level security and buyer protection.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="truck"></i>
+          </div>
+          <h3>Fast Delivery</h3>
+          <p>Get your books delivered quickly with our network of trusted delivery partners.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="star"></i>
+          </div>
+          <h3>Quality Assured</h3>
+          <p>All books are verified for condition and authenticity before listing.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="users"></i>
+          </div>
+          <h3>Trusted Community</h3>
+          <p>Join thousands of verified book lovers in our trusted marketplace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Simple steps to buy or sell your books</p>
+      </div>
+      <div class="steps-container">
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>List Your Book</h3>
+            <p>Upload photos and details of your book in minutes</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Connect with Buyers</h3>
+            <p>Receive offers from interested buyers in our community</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Secure Payment</h3>
+            <p>Get paid safely through our secure payment system</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <i data-lucide="book-open"></i>
+            <span>BookSell</span>
+          </div>
+          <p>Your premium book marketplace for buying and selling quality books.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Marketplace</h4>
+            <a href="browse.html">Browse Books</a>
+            <a href="post-ad.html">Sell Books</a>
+            <a href="categories.html">Categories</a>
+          </div>
+          <div class="footer-column">
+            <h4>Account</h4>
+            <a href="login.html">Login</a>
+            <a href="profile.html">Profile</a>
+            <a href="myorders.html">My Orders</a>
+            <a href="wishlist.html">Wishlist</a>
+          </div>
+          <div class="footer-column">
+            <h4>Support</h4>
+            <a href="contact.html">Contact Us</a>
+            <a href="help.html">Help Center</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BookSell. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="script/main.js"></script>
+</body>
 </html>
