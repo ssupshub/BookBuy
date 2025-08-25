@@ -18,11 +18,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Session middleware
 app.use(session({
-  secret: 'your-secret-key', // Replace with a strong secret in production
+  secret: 'your-secret-key', // Replace in production
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    secure: false, // Set to true in production with HTTPS
+    secure: false, // true in production (HTTPS)
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
