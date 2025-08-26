@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Books - BookSell</title>
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/browse.css">
+  <link rel="stylesheet" href="styles/index.css">
+  
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
+
 <body>
   <!-- Navigation -->
   <nav class="navbar">
@@ -17,25 +21,20 @@
           <i data-lucide="book-open"></i>
           <span>BookSell</span>
         </a>
-        
-        <div class="search-bar">
-          <form id="search-form" class="search-form">
-            <div class="search-input-group">
-              <i data-lucide="search"></i>
-              <input type="text" id="search-input" placeholder="Search for books, authors..." />
-            </div>
-            <button type="submit" class="search-btn">Search</button>
-          </form>
+
+        <div class="nav-links">
+          <a href="/" class="nav-link active">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="post-ad.html" class="nav-link">Sell Books</a>
+          <a href="contact.html" class="nav-link">Contact</a>
         </div>
-        
+
         <div class="nav-actions">
           <a href="wishlist.html" class="nav-icon">
             <i data-lucide="heart"></i>
-            <span class="badge" id="wishlist-count">0</span>
           </a>
           <a href="cart.html" class="nav-icon">
             <i data-lucide="shopping-cart"></i>
-            <span class="badge" id="cart-count">0</span>
           </a>
           <div class="dropdown">
             <button class="nav-icon dropdown-trigger">
@@ -45,9 +44,22 @@
               <a href="login.html" class="dropdown-item">Login / Sign Up</a>
               <a href="profile.html" class="dropdown-item">Profile</a>
               <a href="mylibrary.html" class="dropdown-item">My Library</a>
+              <a href="myorders.html" class="dropdown-item">My Orders</a>
+              <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
             </div>
           </div>
+          <button class="mobile-menu-toggle">
+            <i data-lucide="menu"></i>
+          </button>
         </div>
+      </div>
+
+      <div class="mobile-menu">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="browse.html" class="mobile-link">Browse</a>
+        <a href="post-ad.html" class="mobile-link">Sell Books</a>
+        <a href="login.html" class="mobile-link">Login</a>
+        <a href="profile.html" class="mobile-link">Profile</a>
       </div>
     </div>
   </nav>
@@ -59,14 +71,14 @@
         <h1>Browse Books</h1>
         <p>Discover your next favorite book from our curated collection</p>
       </div>
-      
+
       <!-- Filters and Content -->
       <div class="content-layout">
         <!-- Sidebar Filters -->
         <aside class="filters-sidebar">
           <div class="filters-container">
             <h3>Filters</h3>
-            
+
             <!-- Price Range -->
             <div class="filter-group">
               <h4>Price Range</h4>
@@ -76,7 +88,7 @@
                 <input type="number" id="max-price" placeholder="Max" min="0">
               </div>
             </div>
-            
+
             <!-- Condition -->
             <div class="filter-group">
               <h4>Condition</h4>
@@ -99,7 +111,7 @@
                 </label>
               </div>
             </div>
-            
+
             <!-- Category -->
             <div class="filter-group">
               <h4>Category</h4>
@@ -111,7 +123,7 @@
                 <option value="school">School Books</option>
               </select>
             </div>
-            
+
             <!-- Sort By -->
             <div class="filter-group">
               <h4>Sort By</h4>
@@ -123,13 +135,13 @@
                 <option value="date_oldest">Oldest First</option>
               </select>
             </div>
-            
+
             <button id="clear-filters" class="btn btn-secondary clear-filters">
               Clear All Filters
             </button>
           </div>
         </aside>
-        
+
         <!-- Main Content -->
         <div class="main-content-area">
           <div class="results-header">
@@ -145,18 +157,18 @@
               </button>
             </div>
           </div>
-          
+
           <!-- Loading State -->
           <div id="loading-state" class="loading-state">
             <div class="spinner"></div>
             <p>Loading books...</p>
           </div>
-          
+
           <!-- Books Grid -->
           <div id="books-grid" class="books-grid hidden">
             <!-- Books will be inserted here -->
           </div>
-          
+
           <!-- Empty State -->
           <div id="empty-state" class="empty-state hidden">
             <i data-lucide="book-x"></i>
@@ -168,7 +180,7 @@
       </div>
     </div>
   </main>
-  
+
   <!-- Book Card Template -->
   <template id="book-card-template">
     <div class="book-card">
@@ -200,9 +212,10 @@
       </div>
     </div>
   </template>
-  
+
   <div id="toast-container" class="toast-container"></div>
-  
+
   <script src="script/browse.js"></script>
 </body>
+
 </html>
