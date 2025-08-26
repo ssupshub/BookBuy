@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - BookSell</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <a href="/" class="logo">
+          <i data-lucide="book-open"></i>
+          <span>BookSell</span>
+        </a>
+        
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="post-ad.html" class="nav-link">Sell Books</a>
+          <a href="contact.html" class="nav-link active">Contact</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="wishlist.html" class="nav-icon">
+            <i data-lucide="heart"></i>
+          </a>
+          <a href="cart.html" class="nav-icon">
+            <i data-lucide="shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <button class="nav-icon dropdown-trigger">
+              <i data-lucide="user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="login.html" class="dropdown-item">Login / Sign Up</a>
+              <a href="profile.html" class="dropdown-item">Profile</a>
+              <a href="mylibrary.html" class="dropdown-item">My Library</a>
+              <a href="myorders.html" class="dropdown-item">My Orders</a>
+              <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
+            </div>
+          </div>
+          <button class="mobile-menu-toggle">
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="mobile-menu">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="browse.html" class="mobile-link">Browse</a>
+        <a href="post-ad.html" class="mobile-link">Sell Books</a>
+        <a href="login.html" class="mobile-link">Login</a>
+        <a href="profile.html" class="mobile-link">Profile</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="hero" style="min-height: 80vh;">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Contact <span class="text-accent">BookSell</span></h1>
+          <p class="hero-subtitle">
+            Have questions or need support? We're here to help you with your book selling and buying needs.
+          </p>
+          
+          <div class="contact-info" style="margin-top: 2rem;">
+            <div class="contact-item" style="display: flex; align-items: center; margin-bottom: 1rem;">
+              <i data-lucide="mail" style="margin-right: 1rem; color: var(--accent-gold);"></i>
+              <div>
+                <h3>Email</h3>
+                <p>support@booksell.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-item" style="display: flex; align-items: center; margin-bottom: 1rem;">
+              <i data-lucide="phone" style="margin-right: 1rem; color: var(--accent-gold);"></i>
+              <div>
+                <h3>Phone</h3>
+                <p>+91 123-456-7890</p>
+              </div>
+            </div>
+            
+            <div class="contact-item" style="display: flex; align-items: center; margin-bottom: 1rem;">
+              <i data-lucide="map-pin" style="margin-right: 1rem; color: var(--accent-gold);"></i>
+              <div>
+                <h3>Address</h3>
+                <p>123 Book Street, Delhi, India 110001</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-actions" style="margin-top: 2rem;">
+            <a href="mailto:support@booksell.com" class="btn btn-primary">
+              <i data-lucide="mail"></i>
+              Send Email
+            </a>
+            <a href="tel:+911234567890" class="btn btn-secondary">
+              <i data-lucide="phone"></i>
+              Call Us
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <div class="book-stack">
+            <div class="book book-1"></div>
+            <div class="book book-2"></div>
+            <div class="book book-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <i data-lucide="book-open"></i>
+            <span>BookSell</span>
+          </div>
+          <p>Your premium book marketplace for buying and selling quality books.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Marketplace</h4>
+            <a href="browse.html">Browse Books</a>
+            <a href="post-ad.html">Sell Books</a>
+            <a href="categories.html">Categories</a>
+          </div>
+          <div class="footer-column">
+            <h4>Account</h4>
+            <a href="login.html">Login</a>
+            <a href="profile.html">Profile</a>
+            <a href="myorders.html">My Orders</a>
+            <a href="wishlist.html">Wishlist</a>
+          </div>
+          <div class="footer-column">
+            <h4>Support</h4>
+            <a href="contact.html">Contact Us</a>
+            <a href="help.html">Help Center</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BookSell. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="script/main.js"></script>
+</body>
+</html>
