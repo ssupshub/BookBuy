@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - BookSell</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/browse.css">
+    <link rel="stylesheet" href="styles/index.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <i data-lucide="book-open"></i>
+                    <span>BookSell</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="browse.html" class="nav-link">Browse</a>
+                    <a href="post-ad.html" class="nav-link">Sell Books</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+
+                <div class="nav-actions">
+                    <a href="wishlist.html" class="nav-icon active">
+                        <i data-lucide="heart"></i>
+                    </a>
+                    <a href="cart.html" class="nav-icon">
+                        <i data-lucide="shopping-cart"></i>
+                    </a>
+                    <div class="dropdown">
+                        <button class="nav-icon dropdown-trigger">
+                            <i data-lucide="user"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="login.html" class="dropdown-item">Login / Sign Up</a>
+                            <a href="profile.html" class="dropdown-item">Profile</a>
+                            <a href="mylibrary.html" class="dropdown-item">My Library</a>
+                            <a href="myorders.html" class="dropdown-item">My Orders</a>
+                            <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h1>My Wishlist</h1>
+                <p>Books you've saved for later</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Loading your wishlist...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state hidden">
+                <div class="empty-icon">
+                    <i data-lucide="heart"></i>
+                </div>
+                <h2>Your wishlist is empty</h2>
+                <p>Start adding books you love to your wishlist</p>
+                <a href="browse.html" class="btn btn-primary">Browse Books</a>
+            </div>
+
+            <!-- Books Grid -->
+            <div id="books-grid" class="books-grid hidden">
+                <!-- Books will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Book Card Template -->
+    <template id="book-card-template">
+        <div class="book-card">
+            <div class="book-image-container">
+                <img class="book-image" src="" alt="">
+                <button class="wishlist-btn active" title="Remove from wishlist">
+                    <i data-lucide="heart"></i>
+                </button>
+            </div>
+            <div class="book-details">
+                <h3 class="book-title"></h3>
+                <p class="book-author"></p>
+                <div class="book-price-container">
+                    <span class="book-price"></span>
+                </div>
+                <button class="btn btn-primary add-to-cart-btn">
+                    <i data-lucide="shopping-cart"></i>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            lucide.createIcons();
+
+            let userId = null;
+            const loadingState = document.getElementById('loading-state');
+            const emptyState = document.getElementById('empty-state');
+            const booksGrid = document.getElementById('books-grid');
+
+            // Check session
+            try {
+                const response = await fetch('/api/session', { credentials: 'include' });
+                const data = await response.json();
+
+                if (data.success) {
+                    userId = data.userId;
+                    await loadWishlist();
+                } else {
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = 'login.html';
+            }
+
+            async function loadWishlist() {
+                loadingState.classList.remove('hidden');
+
+                try {
+                    const response = await fetch('/api/wishlist', { credentials: 'include' });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        if (data.books.length === 0) {
+                            showEmptyState();
+                        } else {
+                            displayBooks(data.books);
+                        }
+                    } else {
+                        showEmptyState();
+                    }
+                } catch (error) {
+                    console.error('Load wishlist error:', error);
+                    showEmptyState();
+                } finally {
+                    loadingState.classList.add('hidden');
+                }
+            }
+
+            function displayBooks(books) {
+                const template = document.getElementById('book-card-template');
+                booksGrid.innerHTML = '';
+
+                books.forEach(book => {
+                    const bookElement = template.content.cloneNode(true);
+
+                    bookElement.querySelector('.book-image').src = book.coverImage;
+                    bookElement.querySelector('.book-image').alt = book.title;
+                    bookElement.querySelector('.book-title').textContent = book.title;
+                    bookElement.querySelector('.book-author').textContent = `by ${book.author}`;
+                    bookElement.querySelector('.book-price').textContent = `₹${book.price}`;
+
+                    // Remove from wishlist
+                    bookElement.querySelector('.wishlist-btn').addEventListener('click', async () => {
+                        await removeFromWishlist(book.id);
+                    });
+
+                    // Add to cart
+                    bookElement.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
+                        await addToCart(book.id);
+                    });
+
+                    // Click to view details
+                    bookElement.querySelector('.book-card').addEventListener('click', (e) => {
+                        if (!e.target.closest('.wishlist-btn') && !e.target.closest('.add-to-cart-btn')) {
+                            window.location.href = `bookdetails.html?id=${book.id}`;
+                        }
+                    });
+
+                    booksGrid.appendChild(bookElement);
+                });
+
+                booksGrid.classList.remove('hidden');
+                lucide.createIcons();
+            }
+
+            async function removeFromWishlist(bookId) {
+                try {
+                    const response = await fetch(`/api/wishlist/${bookId}`, {
+                        method: 'DELETE',
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        showToast('Removed', 'Book removed from wishlist', 'info');
+                        await loadWishlist(); // Reload wishlist
+                    } else {
+                        showToast('Error', 'Failed to remove from wishlist', 'error');
+                    }
+                } catch (error) {
+                    console.error('Remove from wishlist error:', error);
+                    showToast('Error', 'Failed to remove from wishlist', 'error');
+                }
+            }
+
+            async function addToCart(bookId) {
+                try {
+                    const response = await fetch('/api/cart', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ bookId, quantity: 1 })
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        showToast('Added to Cart', 'Book added to your cart', 'success');
+                    } else {
+                        showToast('Error', data.message || 'Failed to add to cart', 'error');
+                    }
+                } catch (error) {
+                    console.error('Add to cart error:', error);
+                    showToast('Error', 'Failed to add to cart', 'error');
+                }
+            }
+
+            function showEmptyState() {
+                booksGrid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            }
+
+            function showToast(title, message, type = 'info') {
+                if (window.BookSell && window.BookSell.showToast) {
+                    window.BookSell.showToast(title, message, type);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Library - BookSell</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/browse.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <a href="/" class="logo">
+          <i data-lucide="book-open"></i>
+          <span>BookSell</span>
+        </a>
+        
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="post-ad.html" class="nav-link">Sell Books</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="wishlist.html" class="nav-icon">
+            <i data-lucide="heart"></i>
+          </a>
+          <a href="cart.html" class="nav-icon">
+            <i data-lucide="shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <button class="nav-icon dropdown-trigger">
+              <i data-lucide="user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="login.html" class="dropdown-item">Login / Sign Up</a>
+              <a href="profile.html" class="dropdown-item">Profile</a>
+              <a href="mylibrary.html" class="dropdown-item active">My Library</a>
+              <a href="myorders.html" class="dropdown-item">My Orders</a>
+              <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <div class="page-header">
+        <h1>My Library</h1>
+        <p>Books you're selling</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div class="card">
+          <div style="padding: 1.5rem; text-align: center;">
+            <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
+              <i data-lucide="book"></i>
+            </div>
+            <h3 id="total-books">0</h3>
+            <p>Total Books</p>
+          </div>
+        </div>
+        <div class="card">
+          <div style="padding: 1.5rem; text-align: center;">
+            <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
+              <i data-lucide="trending-up"></i>
+            </div>
+            <h3 id="advertised-books">0</h3>
+            <p>Advertised</p>
+          </div>
+        </div>
+        <div class="card">
+          <div style="padding: 1.5rem; text-align: center;">
+            <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
+              <i data-lucide="shopping-bag"></i>
+            </div>
+            <h3 id="total-sales">0</h3>
+            <p>Total Sales</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-state" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Loading your books...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">
+          <i data-lucide="book-plus"></i>
+        </div>
+        <h2>No books in your library</h2>
+        <p>Start selling by posting your first book</p>
+        <a href="post-ad.html" class="btn btn-primary">Post Your First Book</a>
+      </div>
+
+      <!-- Books Grid -->
+      <div id="books-grid" class="books-grid hidden">
+        <!-- Books will be populated here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Book Card Template -->
+  <template id="book-card-template">
+    <div class="book-card">
+      <div class="book-image-container">
+        <img class="book-image" src="" alt="">
+        <div class="book-status-badge"></div>
+      </div>
+      <div class="book-details">
+        <h3 class="book-title"></h3>
+        <p class="book-author"></p>
+        <div class="book-price-container">
+          <span class="book-price"></span>
+        </div>
+        <div class="book-stats" style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-medium); margin: 0.5rem 0;">
+          <span class="book-views">0 views</span>
+          <span class="book-earnings">₹0 earned</span>
+        </div>
+        <div class="book-actions" style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-ghost edit-btn" style="flex: 1;">
+            <i data-lucide="edit"></i>
+            Edit
+          </button>
+          <button class="btn btn-ghost delete-btn" style="color: red;">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="script/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      lucide.createIcons();
+      
+      let userId = null;
+      const loadingState = document.getElementById('loading-state');
+      const emptyState = document.getElementById('empty-state');
+      const booksGrid = document.getElementById('books-grid');
+      
+      // Check session
+      try {
+        const response = await fetch('/api/session', { credentials: 'include' });
+        const data = await response.json();
+        
+        if (data.success) {
+          userId = data.userId;
+          await loadStats();
+          await loadBooks();
+        } else {
+          window.location.href = 'login.html';
+        }
+      } catch (error) {
+        console.error('Session check error:', error);
+        window.location.href = 'login.html';
+      }
+      
+      async function loadStats() {
+        try {
+          const response = await fetch('/api/seller-stats', { credentials: 'include' });
+          const data = await response.json();
+          
+          if (data.success) {
+            document.getElementById('total-books').textContent = data.totalBooksUploaded;
+            document.getElementById('advertised-books').textContent = data.advertisedBooks;
+            document.getElementById('total-sales').textContent = data.totalSales;
+          }
+        } catch (error) {
+          console.error('Load stats error:', error);
+        }
+      }
+      
+      async function loadBooks() {
+        loadingState.classList.remove('hidden');
+        
+        try {
+          const response = await fetch('/api/user-books', { credentials: 'include' });
+          const data = await response.json();
+          
+          if (data.success) {
+            if (data.books.length === 0) {
+              showEmptyState();
+            } else {
+              displayBooks(data.books);
+            }
+          } else {
+            showEmptyState();
+          }
+        } catch (error) {
+          console.error('Load books error:', error);
+          showEmptyState();
+        } finally {
+          loadingState.classList.add('hidden');
+        }
+      }
+      
+      function displayBooks(books) {
+        const template = document.getElementById('book-card-template');
+        booksGrid.innerHTML = '';
+        
+        books.forEach(book => {
+          const bookElement = template.content.cloneNode(true);
+          
+          bookElement.querySelector('.book-image').src = book.images[0] || 'https://via.placeholder.com/150';
+          bookElement.querySelector('.book-image').alt = book.title;
+          bookElement.querySelector('.book-title').textContent = book.title;
+          bookElement.querySelector('.book-author').textContent = `by ${book.author}`;
+          bookElement.querySelector('.book-price').textContent = `₹${book.price}`;
+          bookElement.querySelector('.book-views').textContent = `${book.views} views`;
+          bookElement.querySelector('.book-earnings').textContent = `₹${book.earnings} earned`;
+          
+          // Status badge
+          const statusBadge = bookElement.querySelector('.book-status-badge');
+          if (book.isAdvertised) {
+            statusBadge.textContent = 'Advertised';
+            statusBadge.style.background = 'var(--accent-gold)';
+            statusBadge.style.color = 'white';
+            statusBadge.style.padding = '0.25rem 0.5rem';
+            statusBadge.style.fontSize = '0.75rem';
+            statusBadge.style.borderRadius = 'var(--radius-sm)';
+          }
+          
+          // Delete button
+          bookElement.querySelector('.delete-btn').addEventListener('click', async () => {
+            if (confirm('Are you sure you want to delete this book?')) {
+              await deleteBook(book._id);
+            }
+          });
+          
+          booksGrid.appendChild(bookElement);
+        });
+        
+        booksGrid.classList.remove('hidden');
+        lucide.createIcons();
+      }
+      
+      async function deleteBook(bookId) {
+        try {
+          const response = await fetch(`/api/book/${bookId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+          });
+          const data = await response.json();
+          
+          if (data.success) {
+            showToast('Deleted', 'Book deleted successfully', 'success');
+            await loadStats();
+            await loadBooks();
+          } else {
+            showToast('Error', 'Failed to delete book', 'error');
+          }
+        } catch (error) {
+          console.error('Delete book error:', error);
+          showToast('Error', 'Failed to delete book', 'error');
+        }
+      }
+      
+      function showEmptyState() {
+        booksGrid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+      }
+      
+      function showToast(title, message, type = 'info') {
+        if (window.BookSell && window.BookSell.showToast) {
+          window.BookSell.showToast(title, message, type);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

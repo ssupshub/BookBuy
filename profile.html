@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - BookSell</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/browse.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <a href="/" class="logo">
+          <i data-lucide="book-open"></i>
+          <span>BookSell</span>
+        </a>
+        
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="browse.html" class="nav-link">Browse</a>
+          <a href="post-ad.html" class="nav-link">Sell Books</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="wishlist.html" class="nav-icon">
+            <i data-lucide="heart"></i>
+          </a>
+          <a href="cart.html" class="nav-icon">
+            <i data-lucide="shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <button class="nav-icon dropdown-trigger">
+              <i data-lucide="user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="login.html" class="dropdown-item">Login / Sign Up</a>
+              <a href="profile.html" class="dropdown-item active">Profile</a>
+              <a href="mylibrary.html" class="dropdown-item">My Library</a>
+              <a href="myorders.html" class="dropdown-item">My Orders</a>
+              <a href="sellingorders.html" class="dropdown-item">Selling Orders</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <div class="page-header">
+        <h1>My Profile</h1>
+        <p>Manage your account information</p>
+      </div>
+
+      <!-- Profile Form -->
+      <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <div style="padding: 2rem;">
+          <form id="profile-form">
+            <div style="margin-bottom: 1.5rem;">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <label for="address">Address</label>
+              <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-text">Update Profile</span>
+                <div class="btn-spinner hidden">
+                  <div class="spinner"></div>
+                </div>
+              </button>
+              <button type="button" id="change-password-btn" class="btn btn-secondary">
+                Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Change Password Modal -->
+      <div id="password-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Change Password</h2>
+            <button class="modal-close" id="modal-close">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
+          
+          <form id="password-form">
+            <div style="margin-bottom: 1rem;">
+              <label for="current-password">Current Password</label>
+              <input type="password" id="current-password" required>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" required>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <label for="confirm-password">Confirm New Password</label>
+              <input type="password" id="confirm-password" required>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: end;">
+              <button type="button" class="btn btn-ghost" id="cancel-password">Cancel</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-text">Change Password</span>
+                <div class="btn-spinner hidden">
+                  <div class="spinner"></div>
+                </div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="script/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      lucide.createIcons();
+      
+      let userId = null;
+      const profileForm = document.getElementById('profile-form');
+      const passwordForm = document.getElementById('password-form');
+      const passwordModal = document.getElementById('password-modal');
+      const changePasswordBtn = document.getElementById('change-password-btn');
+      const modalClose = document.getElementById('modal-close');
+      const cancelPassword = document.getElementById('cancel-password');
+      
+      // Check session and load profile
+      try {
+        const response = await fetch('/api/session', { credentials: 'include' });
+        const data = await response.json();
+        
+        if (data.success) {
+          userId = data.userId;
+          await loadProfile();
+        } else {
+          window.location.href = 'login.html';
+        }
+      } catch (error) {
+        console.error('Session check error:', error);
+        window.location.href = 'login.html';
+      }
+      
+      async function loadProfile() {
+        try {
+          const response = await fetch('/profile', { credentials: 'include' });
+          const data = await response.json();
+          
+          if (data.success) {
+            document.getElementById('name').value = data.name || '';
+            document.getElementById('email').value = data.email || '';
+            document.getElementById('phone').value = data.phone || '';
+            document.getElementById('address').value = data.address || '';
+          }
+        } catch (error) {
+          console.error('Load profile error:', error);
+        }
+      }
+      
+      // Profile form submission
+      profileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnSpinner = submitBtn.querySelector('.btn-spinner');
+        
+        btnText.classList.add('hidden');
+        btnSpinner.classList.remove('hidden');
+        submitBtn.disabled = true;
+        
+        try {
+          const formData = new FormData(profileForm);
+          const response = await fetch('/profile/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+              name: formData.get('name'),
+              email: formData.get('email'),
+              phone: formData.get('phone'),
+              address: formData.get('address')
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            showToast('Success', 'Profile updated successfully', 'success');
+          } else {
+            showToast('Error', data.message || 'Failed to update profile', 'error');
+          }
+        } catch (error) {
+          console.error('Update profile error:', error);
+          showToast('Error', 'Failed to update profile', 'error');
+        } finally {
+          btnText.classList.remove('hidden');
+          btnSpinner.classList.add('hidden');
+          submitBtn.disabled = false;
+        }
+      });
+      
+      // Password modal controls
+      changePasswordBtn.addEventListener('click', () => {
+        passwordModal.classList.remove('hidden');
+      });
+      
+      modalClose.addEventListener('click', () => {
+        passwordModal.classList.add('hidden');
+        passwordForm.reset();
+      });
+      
+      cancelPassword.addEventListener('click', () => {
+        passwordModal.classList.add('hidden');
+        passwordForm.reset();
+      });
+      
+      // Password form submission
+      passwordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (newPassword !== confirmPassword) {
+          showToast('Error', 'New passwords do not match', 'error');
+          return;
+        }
+        
+        if (newPassword.length < 8) {
+          showToast('Error', 'Password must be at least 8 characters long', 'error');
+          return;
+        }
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnSpinner = submitBtn.querySelector('.btn-spinner');
+        
+        btnText.classList.add('hidden');
+        btnSpinner.classList.remove('hidden');
+        submitBtn.disabled = true;
+        
+        try {
+          const response = await fetch('/profile/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ currentPassword, newPassword })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            showToast('Success', 'Password changed successfully', 'success');
+            passwordModal.classList.add('hidden');
+            passwordForm.reset();
+          } else {
+            showToast('Error', data.message || 'Failed to change password', 'error');
+          }
+        } catch (error) {
+          console.error('Change password error:', error);
+          showToast('Error', 'Failed to change password', 'error');
+        } finally {
+          btnText.classList.remove('hidden');
+          btnSpinner.classList.add('hidden');
+          submitBtn.disabled = false;
+        }
+      });
+      
+      function showToast(title, message, type = 'info') {
+        if (window.BookSell && window.BookSell.showToast) {
+          window.BookSell.showToast(title, message, type);
+        }
+      }
+    });
+  </script>
+  
+  <style>
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .modal.hidden {
+      display: none;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 0;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .modal-header h2 {
+      margin: 0;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    
+    .modal-content form {
+      padding: 1.5rem;
+    }
+  </style>
+</body>
+</html>
